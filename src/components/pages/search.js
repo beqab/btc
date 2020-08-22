@@ -13,6 +13,8 @@ class Search extends React.Component {
         walletData: null,
         transactionsData: null,
         blockData: null,
+        error: null,
+        fetching: false,
     };
 
     handleInputChange = (e) => {
@@ -40,13 +42,21 @@ class Search extends React.Component {
                 this.setState({
                     transactionData: res.data,
                     fetching: false,
+                    error: null,
                 });
             })
             .catch((err) => {
-                console.log(err);
-                this.setState({
-                    fetching: false,
-                });
+                if (e.response.data.message) {
+                    this.setState({
+                        fetching: false,
+                        error: e.response.data.message,
+                    });
+                } else {
+                    this.setState({
+                        fetching: false,
+                        error: "Something went wrong. Try Again",
+                    });
+                }
             });
     };
 
@@ -60,12 +70,21 @@ class Search extends React.Component {
                 this.setState({
                     blockData: res.data,
                     fetching: false,
+                    error: null,
                 });
             })
             .catch((err) => {
-                this.setState({
-                    fetching: false,
-                });
+                if (e.response.data.message) {
+                    this.setState({
+                        fetching: false,
+                        error: e.response.data.message,
+                    });
+                } else {
+                    this.setState({
+                        fetching: false,
+                        error: "Something went wrong. Try Again",
+                    });
+                }
             });
         // 1Ep7Mki2vFRQQfbYeNeJXkJbUjo54TbL2H
         // 19Zi8ZcJ4PV2AV64i74GHXKTfyazBnH72h
@@ -76,6 +95,7 @@ class Search extends React.Component {
         this.setState({
             fetching: true,
             blockData: null,
+
             transactionData: null,
         });
 
@@ -85,13 +105,21 @@ class Search extends React.Component {
                 this.setState({
                     walletData: res.data,
                     fetching: false,
+                    error: null,
                 });
             })
             .catch((e) => {
-                console.log(e);
-                this.setState({
-                    fetching: false,
-                });
+                if (e.response.data.message) {
+                    this.setState({
+                        fetching: false,
+                        error: e.response.data.message,
+                    });
+                } else {
+                    this.setState({
+                        fetching: false,
+                        error: "Something went wrong. Try Again",
+                    });
+                }
             });
     };
 
@@ -202,7 +230,7 @@ class Search extends React.Component {
         } else if (this.state.blockData) {
             return (
                 <>
-                    <h3 className="text-center">Transaction Details</h3>
+                    <h3 className="text-center">block Details</h3>
                     <table class="table mt-5">
                         <thead>
                             <tr>
@@ -242,7 +270,11 @@ class Search extends React.Component {
                                         name="blockNumber"
                                         onChange={this.handleInputChange}
                                     />
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                                    <button
+                                        disabled={this.state.fetching}
+                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        type="submit"
+                                    >
                                         Search
                                     </button>
                                 </form>
@@ -270,7 +302,11 @@ class Search extends React.Component {
                                         name="accountNumber"
                                         onChange={this.handleInputChange}
                                     />
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                                    <button
+                                        disabled={this.state.fetching}
+                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        type="submit"
+                                    >
                                         Search
                                     </button>
                                 </form>
@@ -297,7 +333,11 @@ class Search extends React.Component {
                                         name="TransactionID"
                                         onChange={this.handleInputChange}
                                     />
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                                    <button
+                                        disabled={this.state.fetching}
+                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        type="submit"
+                                    >
                                         Search
                                     </button>
                                 </form>
@@ -317,6 +357,12 @@ class Search extends React.Component {
                         {" "}
                         <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" />{" "}
                     </div>
+                )}
+
+                {this.state.error && (
+                    <h4 className="text-center" style={{color: "red"}}>
+                        {this.state.error}
+                    </h4>
                 )}
             </div>
         );
