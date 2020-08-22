@@ -133,6 +133,19 @@ class Search extends React.Component {
         });
     };
 
+    timeConverter = (timestamp) => {
+        let a = new Date(timestamp * 1000);
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let year = a.getFullYear();
+        let month = months[a.getMonth()];
+        let date = a.getDate();
+        let hour = a.getHours();
+        let min = a.getMinutes();
+        let sec = a.getSeconds();
+        let time = date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+        return time;
+    };
+
     getTable = (data, i = 0) => {
         return (
             <>
@@ -174,6 +187,7 @@ class Search extends React.Component {
                     <td>{data.amount}</td>
                     <td>{data.status}</td>
                     <td>{data.txid}</td>
+                    <td>{this.timeConverter(data.timestamp)}</td>
                 </tr>
             </>
         );
@@ -198,6 +212,7 @@ class Search extends React.Component {
                                     <th>amount</th>
                                     <th>status</th>
                                     <th>txid</th>
+                                    <th>date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -221,6 +236,7 @@ class Search extends React.Component {
                                 <th>amount</th>
                                 <th>status</th>
                                 <th>txid</th>
+                                <th>date</th>
                             </tr>
                         </thead>
                         <tbody>{this.getTable(this.state.transactionData.transaction)}</tbody>
@@ -239,6 +255,7 @@ class Search extends React.Component {
                                 <th>amount</th>
                                 <th>status</th>
                                 <th>txid</th>
+                                <th>date</th>
                             </tr>
                         </thead>
 
