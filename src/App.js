@@ -35,7 +35,7 @@ function App() {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse container" id="navbarTogglerDemo01">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="/">
                             Hidden brand
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
