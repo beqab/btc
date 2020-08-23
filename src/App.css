@@ -112,12 +112,32 @@ margin: auto;
     
   }
 }
-        @media only screen and (max-width: 778px) {
+        @media only screen and (max-width: 608px) {
           .table-container .table {
-            min-width: 581px;
+            min-width: 441px;
             font-size: 13px;
             
             
           }
+
+          .link{
+            
+            width: 40px;
+            text-overflow: ellipsis;
+            display: inline-block;
+            overflow: hidden;
+          
+         }
+        
+         .txid{
+          width: 50px;
+          text-overflow: ellipsis;
+          display: inline-block;
+          overflow: hidden;
+         }
+
+         .table td, .table th{
+           padding: 5px;
+         }
 
         }
