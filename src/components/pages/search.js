@@ -15,7 +15,46 @@ class Search extends React.Component {
         blockData: null,
         error: null,
         fetching: false,
+
+        allTransactions: null,
     };
+
+    componentDidMount() {
+        this.setState({
+            fetching: true,
+        });
+        let transactions = [];
+        axios
+            .get("/chain")
+            .then((res) => {
+                res.data.chain.map((el, i) => {
+                    if (el.transactions.length) {
+                        el.transactions.map((trans) => {
+                            if (transactions.length < 10) {
+                                transactions.push(trans);
+                            }
+                        });
+                    }
+                });
+                this.setState({
+                    fetching: false,
+                    allTransactions: transactions,
+                });
+            })
+            .catch((e) => {
+                if (e.response && e.response.data && e.response.data.message) {
+                    this.setState({
+                        fetching: false,
+                        error: e.response.data.message,
+                    });
+                } else {
+                    this.setState({
+                        fetching: false,
+                        error: "Something went wrong. Try Again",
+                    });
+                }
+            });
+    }
 
     handleInputChange = (e) => {
         this.setState({
@@ -30,6 +69,7 @@ class Search extends React.Component {
             walletData: null,
             blockData: null,
             transactionData: null,
+            allTransactions: null,
         });
     };
 
@@ -45,7 +85,7 @@ class Search extends React.Component {
                     error: null,
                 });
             })
-            .catch((err) => {
+            .catch((e) => {
                 if (e.response.data.message) {
                     this.setState({
                         fetching: false,
@@ -73,7 +113,7 @@ class Search extends React.Component {
                     error: null,
                 });
             })
-            .catch((err) => {
+            .catch((e) => {
                 if (e.response.data.message) {
                     this.setState({
                         fetching: false,
@@ -95,7 +135,7 @@ class Search extends React.Component {
         this.setState({
             fetching: true,
             blockData: null,
-
+            allTransactions: null,
             transactionData: null,
         });
 
@@ -197,9 +237,16 @@ class Search extends React.Component {
         if (this.state.walletData) {
             return (
                 <>
-                    <div className="w800">
-                        <h3>address: {this.state.walletData.address}</h3>
-                        <h3>balance: {this.state.walletData.balance}</h3>
+                    <div className="w900 d-flex ">
+                        <div>
+                            <img
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.walletData.address}`}
+                            />
+                        </div>
+                        <div className="mt-3 pl-3">
+                            <h3>address: {this.state.walletData.address}</h3>
+                            <h3>balance: {this.state.walletData.balance}</h3>
+                        </div>
                     </div>
 
                     {this.state.transactionsData && (
@@ -265,12 +312,34 @@ class Search extends React.Component {
                     </table>
                 </>
             );
+        } else if (this.state.allTransactions) {
+            return (
+                <>
+                    <h3 className="text-center"> transactions </h3>
+                    <table class="table mt-5">
+                        <thead>
+                            <tr>
+                                <th>fromwallet</th>
+                                <th>towallet</th>
+                                <th>amount</th>
+                                <th>status</th>
+                                <th>txid</th>
+                                <th>date</th>
+                            </tr>
+                        </thead>
+
+                        {this.state.allTransactions.map((el, i) => {
+                            return <tbody>{this.getTable(el, i)}</tbody>;
+                        })}
+                    </table>
+                </>
+            );
         }
     };
 
     render() {
         return (
-            <div className="container-fluid mt-5 pt-5">
+            <div className="container-fluid  pt-5">
                 <div className="row">
                     <div className="col-md-4">
                         <div class="card">
@@ -362,10 +431,7 @@ class Search extends React.Component {
                         </div>
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                <br />
+
                 <br />
                 <br />
                 {this.getSearchResult()}
