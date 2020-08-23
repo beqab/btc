@@ -226,7 +226,7 @@ class Search extends React.Component {
                     </td>
                     <td>{data.amount}</td>
                     <td>{data.status}</td>
-                    <td>{data.txid}</td>
+                    <td className="txid">{data.txid}</td>
                     <td>{this.timeConverter(data.timestamp)}</td>
                 </tr>
             </>
