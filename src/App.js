@@ -5,7 +5,7 @@ import Search from "./components/pages/search";
 
 function App() {
     return (
-        <div className="App">
+        <div className="App pb-5">
             {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

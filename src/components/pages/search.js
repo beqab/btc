@@ -237,20 +237,46 @@ class Search extends React.Component {
         if (this.state.walletData) {
             return (
                 <>
-                    <div className="w900 d-flex ">
-                        <div>
+                    <div className="w900  d-md-flex d-block ">
+                        <div className="test-sm-centre">
                             <img
                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.walletData.address}`}
                             />
                         </div>
-                        <div className="mt-3 pl-3">
-                            <h3>address: {this.state.walletData.address}</h3>
-                            <h3>balance: {this.state.walletData.balance}</h3>
+                        <div className="mt-3 pl-0 pl-md-3 test-sm-centre">
+                            <h3 className="font-sm-14 ">address: {this.state.walletData.address}</h3>
+                            <h3 className="font-sm-14">balance: {this.state.walletData.balance}</h3>
                         </div>
                     </div>
 
                     {this.state.transactionsData && (
-                        // <div className="container">
+                        <div className="table-container">
+                            <table class="table mt-5">
+                                <thead>
+                                    <tr>
+                                        <th>fromwallet</th>
+                                        <th>towallet</th>
+                                        <th>amount</th>
+                                        <th>status</th>
+                                        <th>txid</th>
+                                        <th>date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.transactionsData.transactions.map((el, i) => {
+                                        return this.getTable(el, i);
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </>
+            );
+        } else if (this.state.transactionData) {
+            return (
+                <>
+                    <h3 className="text-center">Transaction Details</h3>
+                    <div className="table-container">
                         <table class="table mt-5">
                             <thead>
                                 <tr>
@@ -262,76 +288,57 @@ class Search extends React.Component {
                                     <th>date</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {this.state.transactionsData.transactions.map((el, i) => {
-                                    return this.getTable(el, i);
-                                })}
-                            </tbody>
+                            <tbody>{this.getTable(this.state.transactionData.transaction)}</tbody>
                         </table>
-                    )}
-                </>
-            );
-        } else if (this.state.transactionData) {
-            return (
-                <>
-                    <h3 className="text-center">Transaction Details</h3>
-                    <table class="table mt-5">
-                        <thead>
-                            <tr>
-                                <th>fromwallet</th>
-                                <th>towallet</th>
-                                <th>amount</th>
-                                <th>status</th>
-                                <th>txid</th>
-                                <th>date</th>
-                            </tr>
-                        </thead>
-                        <tbody>{this.getTable(this.state.transactionData.transaction)}</tbody>
-                    </table>
+                    </div>
                 </>
             );
         } else if (this.state.blockData) {
             return (
                 <>
                     <h3 className="text-center">block Details</h3>
-                    <table class="table mt-5">
-                        <thead>
-                            <tr>
-                                <th>fromwallet</th>
-                                <th>towallet</th>
-                                <th>amount</th>
-                                <th>status</th>
-                                <th>txid</th>
-                                <th>date</th>
-                            </tr>
-                        </thead>
+                    <div className="table-container">
+                        <table class="table mt-5">
+                            <thead>
+                                <tr>
+                                    <th>fromwallet</th>
+                                    <th>towallet</th>
+                                    <th>amount</th>
+                                    <th>status</th>
+                                    <th>txid</th>
+                                    <th>date</th>
+                                </tr>
+                            </thead>
 
-                        {this.state.blockData.block.map((el, i) => {
-                            return <tbody>{this.getTable(el, i)}</tbody>;
-                        })}
-                    </table>
+                            {this.state.blockData.block.map((el, i) => {
+                                return <tbody>{this.getTable(el, i)}</tbody>;
+                            })}
+                        </table>
+                    </div>
                 </>
             );
         } else if (this.state.allTransactions) {
             return (
                 <>
                     <h3 className="text-center"> transactions </h3>
-                    <table class="table mt-5">
-                        <thead>
-                            <tr>
-                                <th>fromwallet</th>
-                                <th>towallet</th>
-                                <th>amount</th>
-                                <th>status</th>
-                                <th>txid</th>
-                                <th>date</th>
-                            </tr>
-                        </thead>
+                    <div className="table-container">
+                        <table class="table mt-5">
+                            <thead>
+                                <tr>
+                                    <th>fromwallet</th>
+                                    <th>towallet</th>
+                                    <th>amount</th>
+                                    <th>status</th>
+                                    <th>txid</th>
+                                    <th>date</th>
+                                </tr>
+                            </thead>
 
-                        {this.state.allTransactions.map((el, i) => {
-                            return <tbody>{this.getTable(el, i)}</tbody>;
-                        })}
-                    </table>
+                            {this.state.allTransactions.map((el, i) => {
+                                return <tbody>{this.getTable(el, i)}</tbody>;
+                            })}
+                        </table>
+                    </div>
                 </>
             );
         }

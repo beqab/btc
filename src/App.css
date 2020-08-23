@@ -10,3 +10,20 @@ margin: auto;
 .cursorPointer{
   cursor: pointer;
 }
+.table-container{
+  width: 100%;
+  overflow-y: auto;
+  margin: auto;
+}
+  .table-container .table {
+    min-width: 1570px;
+          }
+
+@media only screen and (max-width: 778px) {
+           .font-sm-14{
+             font-size: 15px;
+           }
+           .test-sm-centre{
+             text-align-last: center;
+           }
+}
