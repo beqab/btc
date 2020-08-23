@@ -248,6 +248,10 @@ class Search extends React.Component {
                         <div className="mt-3 pl-0 pl-md-3 test-sm-centre">
                             <h5 className="font-sm-14 ">address: {this.state.walletData.address}</h5>
                             <h5 className="font-sm-14">balance: {this.state.walletData.balance}</h5>
+                            <h5 className="font-sm-14">
+                                Transactions:{" "}
+                                {this.state.transactionsData && this.state.transactionsData.transactions.length}
+                            </h5>
                         </div>
                     </div>
 
