@@ -205,7 +205,7 @@ class Search extends React.Component {
                         }}
                         className="cursorPointer"
                     >
-                        {data.fromwallet}
+                        <span className="link"> {data.fromwallet} </span>
                     </td>
                     <td
                         onClick={() => {
@@ -222,7 +222,7 @@ class Search extends React.Component {
                         }}
                         className="cursorPointer"
                     >
-                        {data.towallet}
+                        <span className="link"> {data.towallet}</span>
                     </td>
                     <td>{data.amount}</td>
                     <td>{data.status}</td>
@@ -237,22 +237,25 @@ class Search extends React.Component {
         if (this.state.walletData) {
             return (
                 <>
-                    <div className="w900  d-md-flex d-block ">
+                    <h3 className="w700 mb-4">Address</h3>
+                    <div className="w700  d-md-flex d-block address ">
                         <div className="test-sm-centre">
                             <img
+                                className="qrImg"
                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.walletData.address}`}
                             />
                         </div>
                         <div className="mt-3 pl-0 pl-md-3 test-sm-centre">
-                            <h3 className="font-sm-14 ">address: {this.state.walletData.address}</h3>
-                            <h3 className="font-sm-14">balance: {this.state.walletData.balance}</h3>
+                            <h5 className="font-sm-14 ">address: {this.state.walletData.address}</h5>
+                            <h5 className="font-sm-14">balance: {this.state.walletData.balance}</h5>
                         </div>
                     </div>
 
                     {this.state.transactionsData && (
                         <div className="table-container">
-                            <table class="table mt-5">
-                                <thead>
+                            <h3 className="mt-5">Transactions</h3>
+                            <table class="table table-striped mt-3">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>fromwallet</th>
                                         <th>towallet</th>
@@ -277,8 +280,8 @@ class Search extends React.Component {
                 <>
                     <h3 className="text-center">Transaction Details</h3>
                     <div className="table-container">
-                        <table class="table mt-5">
-                            <thead>
+                        <table class="table table-striped mt-3">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>fromwallet</th>
                                     <th>towallet</th>
@@ -296,10 +299,10 @@ class Search extends React.Component {
         } else if (this.state.blockData) {
             return (
                 <>
-                    <h3 className="text-center">block Details</h3>
+                    <h3 className="">Block Details</h3>
                     <div className="table-container">
-                        <table class="table mt-5">
-                            <thead>
+                        <table class="table table-striped mt-3">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>fromwallet</th>
                                     <th>towallet</th>
@@ -320,10 +323,10 @@ class Search extends React.Component {
         } else if (this.state.allTransactions) {
             return (
                 <>
-                    <h3 className="text-center"> transactions </h3>
+                    <h3> transactions </h3>
                     <div className="table-container">
-                        <table class="table mt-5">
-                            <thead>
+                        <table class="table table-striped mt-3">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>fromwallet</th>
                                     <th>towallet</th>
@@ -352,11 +355,11 @@ class Search extends React.Component {
                         <div class="card">
                             <h5 class="card-header">search block</h5>
                             <div class="card-body">
-                                <h5 class="card-title">Search ny block number</h5>
-                                <p class="card-text">block number</p>
+                                {/* <h5 class="card-title">Search ny block number</h5> */}
+                                <h5 class="card-text">block number</h5>
                                 <form onSubmit={this.handelSubmitSearchBlock} class="form-inline">
                                     <input
-                                        class="form-control mr-sm-2"
+                                        class="form-control searchInput mr-sm-2"
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
@@ -365,7 +368,7 @@ class Search extends React.Component {
                                     />
                                     <button
                                         disabled={this.state.fetching}
-                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        class="btn btn-outline-success searchButton my-2 my-sm-0"
                                         type="submit"
                                     >
                                         Search
@@ -378,7 +381,7 @@ class Search extends React.Component {
                         <div class="card">
                             <h5 class="card-header">search account</h5>
                             <div class="card-body">
-                                <p class="card-text">search account</p>
+                                {/* <p class="card-text">search account</p> */}
                                 <h5 class="card-title">account number or ID</h5>
                                 <form
                                     onSubmit={(e) => {
@@ -388,7 +391,7 @@ class Search extends React.Component {
                                     class="form-inline"
                                 >
                                     <input
-                                        class="form-control mr-sm-2"
+                                        class="form-control searchInput mr-sm-2"
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
@@ -397,7 +400,7 @@ class Search extends React.Component {
                                     />
                                     <button
                                         disabled={this.state.fetching}
-                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        class="btn searchButton btn-outline-success my-2 my-sm-0"
                                         type="submit"
                                     >
                                         Search
@@ -410,7 +413,7 @@ class Search extends React.Component {
                         <div class="card">
                             <h5 class="card-header">Search transaction hash</h5>
                             <div class="card-body">
-                                <p class="card-text">Search transaction information</p>
+                                {/* <p class="card-text">Search transaction information</p> */}
                                 <h5 class="card-title">Transaction ID</h5>
                                 <form
                                     onSubmit={(e) => {
@@ -419,7 +422,7 @@ class Search extends React.Component {
                                     class="form-inline"
                                 >
                                     <input
-                                        class="form-control mr-sm-2"
+                                        class="form-control searchInput mr-sm-2"
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
@@ -428,7 +431,7 @@ class Search extends React.Component {
                                     />
                                     <button
                                         disabled={this.state.fetching}
-                                        class="btn btn-outline-success my-2 my-sm-0"
+                                        class="btn searchButton btn-outline-success my-2 my-sm-0"
                                         type="submit"
                                     >
                                         Search

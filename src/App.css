@@ -1,9 +1,31 @@
 .App {
- 
+  background: #f7f8fa;
+  min-height: 100vh;
 }
 
-.w900{
-max-width: 900px;
+
+.searchInput{
+  width: calc(100% - 90px) !important;
+  margin-right: 0px !important;
+  border-right: 0px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0px;
+  display: inline-block;
+}
+
+.searchButton{
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+#navBar{
+  background-color: rgb(18, 29, 51) !important;
+}
+    #navBar a{
+  color: #fff !important;
+    }
+.w700{
+max-width: 700px;
 margin: auto;
 }
 
@@ -15,9 +37,44 @@ margin: auto;
   overflow-y: auto;
   margin: auto;
 }
+
+.qrImg{
+  
+  padding: 23px 30px;
+  border: 1px solid #ccc;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  box-sizing: content-box;
+}
+
+.address h5{
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ccc;
+}
+
+.link:hover{
+  text-decoration: underline;
+  color: rgb(13, 53, 120);
+
+}
+.link{
+  color: rgb(12, 108, 242);
+}
   .table-container .table {
-    min-width: 1570px;
-          }
+    min-width: 1381px;
+    font-size: 14px;
+    
+    
+  }
+      .table-container .table tr:hover {
+       background: rgb(240, 242, 247);
+
+      }
+
+      .card{
+        box-shadow: 0 24px 40px rgba(38,55,76,.1);
+      }
 
 @media only screen and (max-width: 778px) {
            .font-sm-14{
