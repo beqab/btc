@@ -1,0 +1,24 @@
+.js-scrollbar {
+  overflow-y: auto !important;
+  font-size: 13px !important;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+  display: inline-block;
+  line-height: 11px;
+}
+.newHeader {
+  padding: #fff !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  background: #fff !important;
+}
+
+.searchWrapper {
+  background: url("../imgs/slider-bg.jpg");
+  padding: 50px 0;
+}
