@@ -48,15 +48,14 @@ const BlockById = ({ match }) => {
         <div className="col-lg-12 mb-12 mb-lg-0 mt-5 pt-5">
           <div className="card h-100">
             <div className="card-header newHeader">
-              <span className="card-header-title">
-                Block #{match.params?.ID}
-              </span>
+              <span className="card-header-title">All Blocks</span>
             </div>
 
             <div
               className="js-scrollbar card-body overflow-hidden mCustomScrollbar _mCS_1 mCS-autoHide"
               style={{
-                height: "400px",
+                maxHeight: "1200px",
+                minHeight: "500px",
                 position: "relative",
                 overflow: "visible",
               }}
