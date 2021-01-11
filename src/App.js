@@ -1,8 +1,10 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import "./scss/style.scss";
 import Search from "./components/pages/search";
+import BlockById from "./components/pages/blocks/blockById";
 
 function App() {
   return (
@@ -65,8 +67,9 @@ function App() {
     </form> */}
           </div>
         </nav>
-
-        <Search />
+        <Route exact path="/" component={Search} />
+        <Route exact path="/block/:ID" component={BlockById} />
+        {/* <Search /> */}
       </div>
       <footer class="page-footer font-small unique-color-dark pt-4">
         <div class="footer-copyright text-center py-3">

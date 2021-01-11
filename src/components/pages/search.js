@@ -140,6 +140,8 @@ class Search extends React.Component {
 
   handelSubmitSearchBlock = (e) => {
     e.preventDefault();
+    this.props.history.push(`/block/${this.state.blockNumber}`);
+    return;
     console.log("sbmt");
     this.clearRes();
     axios
