@@ -5,6 +5,7 @@ import "./App.css";
 import "./scss/style.scss";
 import Search from "./components/pages/search";
 import BlockById from "./components/pages/blocks/blockById";
+import Blocks from "./components/pages/blocks";
 
 function App() {
   return (
@@ -68,7 +69,8 @@ function App() {
           </div>
         </nav>
         <Route exact path="/" component={Search} />
-        <Route exact path="/block/:ID" component={BlockById} />
+        <Route exact path="/blocks/:ID" component={BlockById} />
+        <Route exact path="/blocks" component={Blocks} />
         {/* <Search /> */}
       </div>
       <footer class="page-footer font-small unique-color-dark pt-4">
