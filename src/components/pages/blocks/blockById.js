@@ -46,9 +46,10 @@ const BlockById = ({ match }) => {
             <div
               className="js-scrollbar card-body overflow-hidden mCustomScrollbar _mCS_1 mCS-autoHide"
               style={{
-                height: "400px",
+                minHeight: "400px",
                 position: "relative",
                 overflow: "visible",
+                maxHeight: "1000px",
               }}
             >
               <div
@@ -86,6 +87,110 @@ const BlockById = ({ match }) => {
                           &#128341;
                           {GetTimeAfterDate(blockData?.timestamp)}{" "}
                           <Moment format="YYYY/MM/DD">{blockTime}</Moment>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row align-items-center">
+                        <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+                          <i
+                            class="fal fa-question-circle text-secondary mr-1"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-original-title=""
+                            title=""
+                            data-content="The date and time at which a block is mined."
+                          ></i>
+                          additions_root:
+                        </div>
+                        <div class="col-md-9">
+                          <i class="far fa-clock small mr-1"></i>
+
+                          {blockData?.additions_root}
+                        </div>
+                      </div>
+                      <hr />
+
+                      <div class="row align-items-center">
+                        <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+                          <i
+                            class="fal fa-question-circle text-secondary mr-1"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-original-title=""
+                            title=""
+                            data-content="The date and time at which a block is mined."
+                          ></i>
+                          additions_root:
+                        </div>
+                        <div class="col-md-9">
+                          <i class="far fa-clock small mr-1"></i>
+
+                          {blockData?.additions_root}
+                        </div>
+                      </div>
+                      <hr />
+
+                      <div class="row align-items-center">
+                        <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+                          <i
+                            class="fal fa-question-circle text-secondary mr-1"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-original-title=""
+                            title=""
+                            data-content="The date and time at which a block is mined."
+                          ></i>
+                          total_iters:
+                        </div>
+                        <div class="col-md-9">
+                          <i class="far fa-clock small mr-1"></i>
+
+                          {blockData?.total_iters}
+                        </div>
+                      </div>
+                      <hr />
+
+                      <div class="row align-items-center">
+                        <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+                          <i
+                            class="fal fa-question-circle text-secondary mr-1"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-original-title=""
+                            title=""
+                            data-content="The date and time at which a block is mined."
+                          ></i>
+                          extension_data:
+                        </div>
+                        <div class="col-md-9">
+                          <i class="far fa-clock small mr-1"></i>
+
+                          {blockData?.extension_data}
+                        </div>
+                      </div>
+                      <hr />
+
+                      <div class="row align-items-center">
+                        <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+                          <i
+                            class="fal fa-question-circle text-secondary mr-1"
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-original-title=""
+                            title=""
+                            data-content="The date and time at which a block is mined."
+                          ></i>
+                          farmer_rewards_puzzle_hash:
+                        </div>
+                        <div class="col-md-9">
+                          <i class="far fa-clock small mr-1"></i>
+
+                          {blockData?.farmer_rewards_puzzle_hash}
                         </div>
                       </div>
                       <hr />
