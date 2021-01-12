@@ -656,7 +656,7 @@ class Search extends React.Component {
                                       <span className="d-inline-block d-sm-none">
                                         Block
                                       </span>{" "}
-                                      <a href="/block/11627830">
+                                      <a href={/blocks/ + el.data.height}>
                                         {el.data.height}
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
@@ -810,7 +810,7 @@ class Search extends React.Component {
                                       <span className="d-inline-block d-sm-none">
                                         Block
                                       </span>{" "}
-                                      <a href="/block/11627830">
+                                      <a href={/blocks/ + el.data.height}>
                                         {el.data.height}
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
