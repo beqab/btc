@@ -29,7 +29,7 @@ function App() {
         <div className="header">
           <div className="container">
             <nav id="navBar" className="navbar navbar-expand-lg  ">
-              <a className="navbar-brand" href="javascript:void(0)">
+              <a className="navbar-brand" href="/">
                 <img height="30" src={logo2} />
               </a>
               <button
