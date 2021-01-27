@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import logo from "./logo.svg";
+import logo from "./imgs/logo.svg";
+import logo2 from "./imgs/logo2.png";
 import "./App.css";
 import "./scss/style.scss";
 import Search from "./components/pages/search";
@@ -25,10 +26,65 @@ function App() {
           Learn React
         </a>
       </header> */}
+        <div className="header">
+          <div className="container">
+            <nav id="navBar" className="navbar navbar-expand-lg  ">
+              <a className="navbar-brand" href="javascript:void(0)">
+                <img height="30" src={logo2} />
+              </a>
+              <button
+                className="navbar-toggler navbar-toggler-right collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navb"
+                aria-expanded="false"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
 
-        <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light">
+              <div className="navbar-collapse collapse" id="navb">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <a className="nav-link" href="javascript:void(0)">
+                      Link
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="javascript:void(0)">
+                      Link
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link disabled" href="javascript:void(0)">
+                      Disabled
+                    </a>
+                  </li>
+                </ul>
+                <button className="brn btn-default ml-5 btnBluGradient">
+                  <svg
+                    id="Icon_open-account-login"
+                    data-name="Icon open-account-login"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13.815"
+                    height="20.838"
+                    viewBox="0 0 23.815 20.838"
+                  >
+                    <path
+                      id="Icon_open-account-login-2"
+                      data-name="Icon open-account-login"
+                      d="M8.931,0V2.977H20.838V17.862H8.931v2.977H23.815V0Zm2.977,5.954V8.931H0v2.977H11.908v2.977l5.954-4.465Z"
+                      fill="#fff"
+                    />
+                  </svg>{" "}
+                  login
+                </button>
+              </div>
+            </nav>
+          </div>
+        </div>
+        {/* <nav id="navBar" className="navbar navbar-expand-lg navbar-light bg-light">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarTogglerDemo01"
@@ -36,47 +92,59 @@ function App() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            class="collapse navbar-collapse container"
+            className="collapse navbar-collapse container"
             id="navbarTogglerDemo01"
           >
-            <a class="navbar-brand" href="/">
-              Hidden brand
+            <a className="navbar-brand" href="/">
+              <img height="30" src={logo2} />
             </a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">
-                  Home <span class="sr-only">(current)</span>
+            <ul className="navbar-nav mt-2 mt-lg-0">
+              <li className="nav-item active">
+                <a className="nav-link" href="/">
+                  Home <span className="sr-only">(current)</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
                   Link
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">
+              <li className="nav-item">
+                <a className="nav-link disabled" href="#">
                   Disabled
                 </a>
               </li>
             </ul>
-            {/* <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> */}
           </div>
-        </nav>
+        </nav> */}
         <Route exact path="/" component={Search} />
         <Route exact path="/blocks/:ID" component={BlockById} />
         <Route exact path="/blocks" component={Blocks} />
         {/* <Search /> */}
       </div>
-      <footer class="page-footer font-small unique-color-dark pt-4">
-        <div class="footer-copyright text-center py-3">
-          © 2020 Copyright:
-          <a href="https://.com/"> MDB.com</a>
+      <footer className="page-footer font-small unique-color-dark pt-4">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-md-6">
+              <div className="footer-copyright text-center py-3">
+                <img src={logo} /> Powered by WAVE © 2020 Copyright
+              </div>
+            </div>
+            <div className="col-12 col-md-6 text-center font-wight">
+              <div>
+                <a href="#">Lorem ipsum dolor sit ame</a>
+              </div>
+              <div>
+                <a href="#">Lorem ipsum dolor sit ame</a>
+              </div>
+              <div>
+                <a href="#">Lorem ipsum dolor sit ame</a>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </>

@@ -756,9 +756,9 @@ class Search extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="card-footer">
+                <div className="card-footer p-3">
                   <a
-                    className="btn btn-xs btn-block btn-soft-primary"
+                    className="btn btnBluGradient w-75 m-auto  btn-xs btn-block btn-soft-primary"
                     href="/blocks"
                   >
                     View all blocks
@@ -910,9 +910,9 @@ class Search extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="card-footer">
+                <div className="card-footer p-3">
                   <a
-                    className="btn btn-xs btn-block btn-soft-primary"
+                    className="btn btn-xs  btnBluGradient w-75 m-auto  btn-block btn-soft-primary"
                     href="/blocks"
                   >
                     View all transactions
