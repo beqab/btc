@@ -1,6 +1,6 @@
 const getTimeAfterDate = (date) => {
   const now = new Date();
-  let time = Math.abs(now.getTime() / 1000 - date);
+  let time = Math.abs(now.getTime() - date);
   // calculate (and subtract) whole days
   var days = Math.floor(time / 86400);
   time -= days * 86400;

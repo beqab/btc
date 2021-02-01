@@ -101,3 +101,17 @@ footer {
     color: #fff;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .searchBox input {
+    width: calc(100vw - 190px);
+  }
+}
+
+.hathOverflow {
+  max-width: 91px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+}

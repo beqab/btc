@@ -65,17 +65,11 @@ class Search extends React.Component {
       });
 
     axios
-      .post(
-        "/get_blockchain_state",
-        {},
-        {
-          heder: { "Content-Type": "application/json" },
-        }
-      )
+      .get("block/chains")
       .then((res) => {
         this.setState({
           fetching: false,
-          allBlocks: res.data.blockchain_state.tips,
+          allBlocks: res.data,
         });
         // debugger;
       })
@@ -457,7 +451,7 @@ class Search extends React.Component {
 
   getTimeAfterDate = (date) => {
     const now = new Date();
-    let time = Math.abs(now.getTime() / 1000 - date);
+    let time = Math.abs(now.getTime() - date);
     // calculate (and subtract) whole days
     var days = Math.floor(time / 86400);
     time -= days * 86400;
@@ -676,7 +670,6 @@ class Search extends React.Component {
                         this.state.allBlocks.map((el, i) => {
                           return (
                             <>
-                              {" "}
                               <div className="row">
                                 <div className="col-sm-4">
                                   <div className="media align-items-sm-center mr-4 mb-1 mb-sm-0">
@@ -691,14 +684,15 @@ class Search extends React.Component {
                                       <span className="d-inline-block d-sm-none">
                                         Block
                                       </span>{" "}
-                                      <a href={/blocks/ + el.data.height}>
-                                        {el.data.height}
+                                      <a
+                                        className="hathOverflow"
+                                        href={/block/ + el.hash}
+                                      >
+                                        {el.hash}
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                         {" "}
-                                        {this.getTimeAfterDate(
-                                          el.data.timestamp
-                                        )}
+                                        {this.getTimeAfterDate(el.timestamp)}
                                       </span>
                                     </div>
                                   </div>
@@ -710,9 +704,9 @@ class Search extends React.Component {
                                         Miner{" "}
                                         <a
                                           className="hash-tag text-truncate"
-                                          href="/address/0x6ebaf477f83e055589c1188bcc6ddccd8c9b131a"
+                                          href="#"
                                         >
-                                          {el.data.farmer_rewards_puzzle_hash}
+                                          {el.validator}
                                         </a>
                                       </span>
                                       <a
@@ -724,9 +718,7 @@ class Search extends React.Component {
                                         185 txns{" "}
                                       </a>{" "}
                                       <span className="small text-secondary">
-                                        {this.getTimeAfterDate(
-                                          el.data.timestamp
-                                        )}
+                                        {this.getTimeAfterDate(el.timestamp)}
                                       </span>
                                       <span className="d-inline-block d-sm-none">
                                         <span
@@ -735,9 +727,9 @@ class Search extends React.Component {
                                           title=""
                                           data-original-title="Block Reward"
                                         >
-                                          {Number(
+                                          {/* {Number(
                                             el.data.total_transaction_fees
-                                          ) / 100000000}
+                                          ) / 100000000} */}
                                           Waves
                                         </span>{" "}
                                       </span>
@@ -749,9 +741,6 @@ class Search extends React.Component {
                                         title=""
                                         data-original-title="Block Reward"
                                       >
-                                        {Number(
-                                          el.data.total_transaction_fees
-                                        ) / 10000000000}{" "}
                                         Waves
                                       </span>
                                     </div>
@@ -828,6 +817,7 @@ class Search extends React.Component {
                     >
                       {this.state.allBlocks &&
                         this.state.allBlocks.map((el, i) => {
+                          if (!el.transactions.length) return;
                           return (
                             <>
                               {" "}
@@ -837,7 +827,7 @@ class Search extends React.Component {
                                     <div className="d-none d-sm-flex mr-2">
                                       <span className="btn btn-icon btn-soft-secondary">
                                         <span className="btn-icon__inner text-dark">
-                                          Bk
+                                          Tx
                                         </span>
                                       </span>
                                     </div>
@@ -845,13 +835,18 @@ class Search extends React.Component {
                                       <span className="d-inline-block d-sm-none">
                                         Block
                                       </span>{" "}
-                                      <a href={/blocks/ + el.data.height}>
-                                        {el.data.height}
+                                      <a
+                                        className="hathOverflow"
+                                        href={
+                                          /transaction/ + el.transactions[0].id
+                                        }
+                                      >
+                                        {el.transactions[0].id}
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                         {" "}
                                         {this.getTimeAfterDate(
-                                          el.data.timestamp
+                                          el.transactions[0].input.timestamp
                                         )}
                                       </span>
                                     </div>
@@ -861,40 +856,46 @@ class Search extends React.Component {
                                   <div className="d-flex justify-content-between">
                                     <div className="text-nowrap">
                                       <span className="d-block mb-1 mb-sm-0">
-                                        Miner{" "}
+                                        from
                                         <a
                                           className="hash-tag text-truncate"
-                                          href="/address/0x6ebaf477f83e055589c1188bcc6ddccd8c9b131a"
+                                          href={
+                                            "wolet/" +
+                                            el.transactions[0].input.from
+                                          }
                                         >
-                                          {el.data.farmer_rewards_puzzle_hash}
+                                          {el.transactions[0].input.from}
                                         </a>
                                       </span>
-                                      <a
+                                      <div
                                         href="/txs?block=11627830"
                                         data-toggle="tooltip"
                                         title=""
                                         data-original-title="Transactions in this Block"
                                       >
-                                        185 txns{" "}
-                                      </a>{" "}
-                                      <span className="small text-secondary">
-                                        {this.getTimeAfterDate(
-                                          el.data.timestamp
-                                        )}
-                                      </span>
-                                      <span className="d-inline-block d-sm-none">
+                                        to{" "}
+                                        <a
+                                          className=" hash-tag text-truncate"
+                                          href={
+                                            "wolet/" +
+                                            el.transactions[0].output.to
+                                          }
+                                        >
+                                          {el.transactions[0].output.to}
+                                        </a>
+                                      </div>{" "}
+                                      <span className="small text-secondary"></span>
+                                      {/* <span className="d-inline-block d-sm-none">
                                         <span
                                           className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
                                           data-toggle="tooltip"
                                           title=""
                                           data-original-title="Block Reward"
                                         >
-                                          {Number(
-                                            el.data.total_transaction_fees
-                                          ) / 100000000}
+                                          fee: {el.transactions[0].output.fee}{" "}
                                           Waves
                                         </span>{" "}
-                                      </span>
+                                      </span> */}
                                     </div>
                                     <div className="d-none d-sm-block">
                                       <span
@@ -903,9 +904,7 @@ class Search extends React.Component {
                                         title=""
                                         data-original-title="Block Reward"
                                       >
-                                        {Number(
-                                          el.data.total_transaction_fees
-                                        ) / 10000000000}{" "}
+                                        fee: {el.transactions[0].output.fee}{" "}
                                         Waves
                                       </span>
                                     </div>
@@ -948,7 +947,7 @@ class Search extends React.Component {
                 <div className="card-footer p-3">
                   <a
                     className="btn btn-xs  btnBluGradient w-75 m-auto  btn-block btn-soft-primary"
-                    href="/blocks"
+                    href="/transactions"
                   >
                     View all transactions
                   </a>

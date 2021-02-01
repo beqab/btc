@@ -3,7 +3,7 @@ import axios from "axios";
 import Moment from "react-moment";
 import { Route } from "react-router-dom";
 import { User } from "react-router-dom";
-import GetTimeAfterDate from "../../hepers/getTimeBeforeNow";
+import getTimeAfterDate from "../../hepers/getTimeBeforeNow";
 
 const BlockById = ({ match }) => {
   const [allBlocks, setAllBlocks] = useState(null);
@@ -12,19 +12,13 @@ const BlockById = ({ match }) => {
 
   useEffect(() => {
     axios
-      .post(
-        "/get_blockchain_state",
-        {},
-        {
-          heder: { "Content-Type": "application/json" },
-        }
-      )
+      .get("block/chains")
       .then((res) => {
         // this.setState({
         //   fetching: false,
         //   allBlocks: res.data.blockchain_state.tips,
         // });
-        setAllBlocks(res.data.blockchain_state.tips);
+        setAllBlocks(res.data);
         // debugger;
       })
       .catch((e) => {
@@ -54,7 +48,7 @@ const BlockById = ({ match }) => {
             <div
               className="js-scrollbar card-body overflow-hidden mCustomScrollbar _mCS_1 mCS-autoHide"
               style={{
-                maxHeight: "1200px",
+                maxHeight: "60vh",
                 minHeight: "500px",
                 position: "relative",
                 overflow: "visible",
@@ -95,10 +89,15 @@ const BlockById = ({ match }) => {
                                   <span className="d-inline-block d-sm-none">
                                     Block
                                   </span>{" "}
-                                  <a href="/block/11627830">{el.data.height}</a>
+                                  <a
+                                    className="hathOverflow"
+                                    href={/block/ + el.hash}
+                                  >
+                                    {el.hash}
+                                  </a>
                                   <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                     {" "}
-                                    {GetTimeAfterDate(el.data.timestamp)}
+                                    {getTimeAfterDate(el.timestamp)}
                                   </span>
                                 </div>
                               </div>
@@ -110,9 +109,9 @@ const BlockById = ({ match }) => {
                                     Miner{" "}
                                     <a
                                       className="hash-tag text-truncate"
-                                      href="/address/0x6ebaf477f83e055589c1188bcc6ddccd8c9b131a"
+                                      href="#"
                                     >
-                                      {el.data.farmer_rewards_puzzle_hash}
+                                      {el.validator}
                                     </a>
                                   </span>
                                   <a
@@ -124,7 +123,7 @@ const BlockById = ({ match }) => {
                                     185 txns{" "}
                                   </a>{" "}
                                   <span className="small text-secondary">
-                                    {GetTimeAfterDate(el.data.timestamp)}
+                                    {getTimeAfterDate(el.timestamp)}
                                   </span>
                                   <span className="d-inline-block d-sm-none">
                                     <span
@@ -133,8 +132,9 @@ const BlockById = ({ match }) => {
                                       title=""
                                       data-original-title="Block Reward"
                                     >
-                                      {Number(el.data.total_transaction_fees) /
-                                        100000000}
+                                      {/* {Number(
+                                            el.data.total_transaction_fees
+                                          ) / 100000000} */}
                                       Waves
                                     </span>{" "}
                                   </span>
@@ -146,8 +146,6 @@ const BlockById = ({ match }) => {
                                     title=""
                                     data-original-title="Block Reward"
                                   >
-                                    {Number(el.data.total_transaction_fees) /
-                                      10000000000}{" "}
                                     Waves
                                   </span>
                                 </div>
