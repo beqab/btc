@@ -15,7 +15,7 @@ const getTimeAfterDate = (date) => {
 
   // what's left is seconds
   var seconds = time % 60; // in theory the modulus is not required
-  console.log(seconds, "s", minutes, "m", hours, "h", days, "d");
+  // console.log(seconds, "s", minutes, "m", hours, "h", days, "d");
   if (days) {
     return days + " days ago";
   }

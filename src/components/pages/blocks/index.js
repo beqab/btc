@@ -4,8 +4,11 @@ import Moment from "react-moment";
 import { Route } from "react-router-dom";
 import { User } from "react-router-dom";
 import getTimeAfterDate from "../../hepers/getTimeBeforeNow";
+import ReactPaginate from "react-paginate";
 
-const BlockById = ({ match }) => {
+var qs = require("qs");
+
+const BlockById = ({ match, ...props }) => {
   const [allBlocks, setAllBlocks] = useState(null);
   const [blockTime, setBlockTime] = useState(null);
   const [blockError, setBlockError] = useState(null);
@@ -35,6 +38,25 @@ const BlockById = ({ match }) => {
         // }
       });
   }, []);
+
+  const generateQueryString = (queryObject) => {
+    return qs.stringify(queryObject, { encode: false });
+  };
+
+  const pageChangeHandler = ({ selected }) => changeRoute(selected);
+
+  const changeRoute = (pg) => {
+    // var obj = qs.parse(props.location.search);
+    // console.log(match, obj);
+    // debugger;
+
+    const page = pg.toString();
+    let queryObj = { ...match.params, page };
+
+    const queryStr = generateQueryString(queryObj);
+
+    props.history.push(`/blocks?${queryStr}`);
+  };
 
   return (
     <div className="container">
@@ -158,6 +180,21 @@ const BlockById = ({ match }) => {
                     })}
                   {/* )} */}
                 </div>
+
+                <ReactPaginate
+                  previousLabel={"previous"}
+                  nextLabel={"next"}
+                  breakLabel={"..."}
+                  breakClassName={"break-me"}
+                  pageCount={10}
+                  // marginPagesDisplayed={2}
+                  // pageRangeDisplayed={5}
+                  forcePage={Number(props.location.search.split("=")[1])}
+                  onPageChange={pageChangeHandler}
+                  containerClassName={"pagination"}
+                  subContainerClassName={"pages pagination"}
+                  activeClassName={"active"}
+                />
               </div>
             </div>
           </div>
