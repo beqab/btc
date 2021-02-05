@@ -15,7 +15,7 @@ class Search extends React.Component {
     blockData: null,
     error: null,
     fetching: false,
-    allBlocks: null,
+    allBlocks: [],
 
     allTransactions: null,
 
@@ -52,49 +52,49 @@ class Search extends React.Component {
     //   japan    kilo     lemon    liter  `,
     //   }),
     // });
-    axios
-      .post("/wallet/create", {
-        secret: `apple   alaska   albert   albino   album
-        alcohol  alex     alpha    amadeus  amanda   amazon
-        america  analog   animal   antenna  antonio  apollo
-        april    aroma    artist   aspirin  athlete  atlas
-        banana   bandit   banjo    bikini   bingo    bonus
-        camera   canada   carbon   casino   catalog  cinema
-        citizen  cobra    comet    compact  complex  context
-        credit   critic   crystal  culture  david    delta
-        dialog   diploma  doctor   domino   dragon   drama
-        extra    fabric   final    focus    forum    galaxy
-        gallery  global   harmony  hotel    humor    index
-        japan    kilo     lemon    liter  `,
-      })
-      .then((res) => {
-        res.data.chain.map((el, i) => {
-          if (el.transactions.length) {
-            el.transactions.map((trans) => {
-              if (transactions.length < 10) {
-                transactions.push(trans);
-              }
-            });
-          }
-        });
-        this.setState({
-          fetching: false,
-          allTransactions: transactions,
-        });
-      })
-      .catch((e) => {
-        if (e.response && e.response.data && e.response.data.message) {
-          this.setState({
-            fetching: false,
-            error: e.response.data.message,
-          });
-        } else {
-          this.setState({
-            fetching: false,
-            error: "Something went wrong. Try Again",
-          });
-        }
-      });
+    // axios
+    // .post("/wallet/create", {
+    //   secret: `apple   alaska   albert   albino   album
+    //   alcohol  alex     alpha    amadeus  amanda   amazon
+    //   america  analog   animal   antenna  antonio  apollo
+    //   april    aroma    artist   aspirin  athlete  atlas
+    //   banana   bandit   banjo    bikini   bingo    bonus
+    //   camera   canada   carbon   casino   catalog  cinema
+    //   citizen  cobra    comet    compact  complex  context
+    //   credit   critic   crystal  culture  david    delta
+    //   dialog   diploma  doctor   domino   dragon   drama
+    //   extra    fabric   final    focus    forum    galaxy
+    //   gallery  global   harmony  hotel    humor    index
+    //   japan    kilo     lemon    liter  `,
+    // })
+    // .then((res) => {
+    //   res.data.chain.map((el, i) => {
+    //     if (el.transactions.length) {
+    //       el.transactions.map((trans) => {
+    //         if (transactions.length < 10) {
+    //           transactions.push(trans);
+    //         }
+    //       });
+    //     }
+    //   });
+    //   this.setState({
+    //     fetching: false,
+    //     allTransactions: transactions,
+    //   });
+    // })
+    // .catch((e) => {
+    //   if (e.response && e.response.data && e.response.data.message) {
+    //     this.setState({
+    //       fetching: false,
+    //       error: e.response.data.message,
+    //     });
+    //   } else {
+    //     this.setState({
+    //       fetching: false,
+    //       error: "Something went wrong. Try Again",
+    //     });
+    //   }
+    // });
 
     axios
       .get("/chain")

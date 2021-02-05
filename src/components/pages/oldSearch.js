@@ -15,7 +15,7 @@ class Search extends React.Component {
     blockData: null,
     error: null,
     fetching: false,
-    allBlocks: null,
+    allBlocks: [],
 
     allTransactions: null,
   };
