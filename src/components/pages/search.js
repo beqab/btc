@@ -18,6 +18,9 @@ class Search extends React.Component {
     allBlocks: null,
 
     allTransactions: null,
+
+    searchValue: "",
+    searchType: "block",
   };
 
   componentDidMount() {
@@ -27,14 +30,43 @@ class Search extends React.Component {
     let transactions = [];
     // http://51.255.211.135/get_header_by_height
     // curl -d '{}' -H "Content-Type: application/json" -X POST http://51.255.211.135/get_blockchain_state
+
+    // fetch("http://51.255.211.135:8181/wallet/create ", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    //   body: JSON.stringify({
+    //     secret: `apple   alaska   albert   albino   album
+    //   alcohol  alex     alpha    amadeus  amanda   amazon
+    //   america  analog   animal   antenna  antonio  apollo
+    //   april    aroma    artist   aspirin  athlete  atlas
+    //   banana   bandit   banjo    bikini   bingo    bonus
+    //   camera   canada   carbon   casino   catalog  cinema
+    //   citizen  cobra    comet    compact  complex  context
+    //   credit   critic   crystal  culture  david    delta
+    //   dialog   diploma  doctor   domino   dragon   drama
+    //   extra    fabric   final    focus    forum    galaxy
+    //   gallery  global   harmony  hotel    humor    index
+    //   japan    kilo     lemon    liter  `,
+    //   }),
+    // });
     axios
-      .get(
-        "/chain",
-        {},
-        {
-          heder: { "Content-Type": "application/json" },
-        }
-      )
+      .post("/wallet/create", {
+        secret: `apple   alaska   albert   albino   album
+        alcohol  alex     alpha    amadeus  amanda   amazon
+        america  analog   animal   antenna  antonio  apollo
+        april    aroma    artist   aspirin  athlete  atlas
+        banana   bandit   banjo    bikini   bingo    bonus
+        camera   canada   carbon   casino   catalog  cinema
+        citizen  cobra    comet    compact  complex  context
+        credit   critic   crystal  culture  david    delta
+        dialog   diploma  doctor   domino   dragon   drama
+        extra    fabric   final    focus    forum    galaxy
+        gallery  global   harmony  hotel    humor    index
+        japan    kilo     lemon    liter  `,
+      })
       .then((res) => {
         res.data.chain.map((el, i) => {
           if (el.transactions.length) {
@@ -65,7 +97,7 @@ class Search extends React.Component {
       });
 
     axios
-      .get("block/chains")
+      .get("/chain")
       .then((res) => {
         this.setState({
           fetching: false,
@@ -491,25 +523,54 @@ class Search extends React.Component {
     );
   };
 
+  submitSearch = () => {
+    console.log(this.state.searchType, this.state.searchValue);
+    if (this.state.searchType === "block") {
+      this.props.history.push(`/block/${this.state.searchValue}`);
+    }
+    if (this.state.searchType === "wolet") {
+      this.props.history.push(`/wolet/${this.state.searchValue}`);
+    }
+    if (this.state.searchType === "transaction") {
+      this.props.history.push(`/transaction/${this.state.searchValue}`);
+    }
+  };
+
   render() {
     return (
       <>
         <div className="searchWrapper">
           <div className="container">
-            <div className="row d-flex flex-column pb-4 pl-4">
+            <form
+              onSubmit={this.submitSearch}
+              className="row d-flex flex-column pb-4 pl-4"
+            >
               <div>
                 <label style={{ color: "#fff" }}>
                   The WAVE Blockchain Explorer
                 </label>
               </div>
               <div className="searchBox">
-                <select>
-                  <option>block</option>
-                  <option>address</option>
-                  <option>Txn Hash</option>
-                  <option>Token</option>
+                <select
+                  onChange={(e) => {
+                    this.setState({
+                      searchType: e.target.value,
+                    });
+                  }}
+                >
+                  <option value="block">block</option>
+                  <option value="wolet">address</option>
+                  <option value="transaction">Txn Hash</option>
                 </select>
-                <input placeholder="Search by Address / Txn Hash / Block / Token / Ens" />
+                <input
+                  onChange={(e) => {
+                    // debugger;
+                    this.setState({
+                      searchValue: e.target.value,
+                    });
+                  }}
+                  placeholder="Search by Address / Txn Hash / Block "
+                />
                 <button>
                   <svg
                     aria-hidden="true"
@@ -530,7 +591,7 @@ class Search extends React.Component {
                   </svg>
                 </button>
               </div>
-            </div>
+            </form>
             <div className="row">
               <div className="col-md-4">
                 <div className="card">
@@ -838,10 +899,11 @@ class Search extends React.Component {
                                       <a
                                         className="hathOverflow"
                                         href={
-                                          /transaction/ + el.transactions[0].id
+                                          /transaction/ +
+                                          el.transactions[0].txId
                                         }
                                       >
-                                        {el.transactions[0].id}
+                                        {el.transactions[0].txId}
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                         {" "}

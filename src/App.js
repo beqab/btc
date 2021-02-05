@@ -47,18 +47,13 @@ function App() {
               <div className="navbar-collapse collapse" id="navb">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="javascript:void(0)">
-                      Link
+                    <a className="nav-link" href="/blocks">
+                      blocks
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="javascript:void(0)">
-                      Link
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link disabled" href="javascript:void(0)">
-                      Disabled
+                    <a className="nav-link" href="/transactions">
+                      transactions
                     </a>
                   </li>
                 </ul>
