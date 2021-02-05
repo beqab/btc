@@ -57,7 +57,7 @@ function App() {
                     </a>
                   </li>
                 </ul>
-                <button className="brn btn-default ml-5 btnBluGradient">
+                {/* <button className="brn btn-default ml-5 btnBluGradient">
                   <svg
                     id="Icon_open-account-login"
                     data-name="Icon open-account-login"
@@ -74,7 +74,7 @@ function App() {
                     />
                   </svg>{" "}
                   login
-                </button>
+                </button> */}
               </div>
             </nav>
           </div>
