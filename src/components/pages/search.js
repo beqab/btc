@@ -730,7 +730,7 @@ class Search extends React.Component {
                       {this.state.allBlocks &&
                         this.state.allBlocks.length &&
                         this.state.allBlocks.map((el, i) => {
-                          if (!el.transactions.length) return;
+                          // if (!el.transactions.length) return;
 
                           return (
                             <>
