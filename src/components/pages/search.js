@@ -728,7 +728,10 @@ class Search extends React.Component {
                       dir="ltr"
                     >
                       {this.state.allBlocks &&
+                        this.state.allBlocks.length &&
                         this.state.allBlocks.map((el, i) => {
+                          if (!el.transactions.length) return;
+
                           return (
                             <>
                               <div className="row">
@@ -877,6 +880,7 @@ class Search extends React.Component {
                       dir="ltr"
                     >
                       {this.state.allBlocks &&
+                        this.state.allBlocks.length &&
                         this.state.allBlocks.map((el, i) => {
                           if (!el.transactions.length) return;
                           return (
