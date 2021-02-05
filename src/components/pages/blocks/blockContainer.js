@@ -126,13 +126,14 @@ function blockContainer({ block }) {
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-
-                          {block.previousHash}
+                          <a href={"/block/" + block.previousHash}>
+                            {block.previousHash}
+                          </a>
                         </div>
                       </div>
                       <hr />
 
-                      <div class="row align-items-center">
+                      {/* <div class="row align-items-center">
                         <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
                           <i
                             class="fal fa-question-circle text-secondary mr-1"
@@ -151,9 +152,9 @@ function blockContainer({ block }) {
                           {block.secret}
                         </div>
                       </div>
-                      <hr />
+                      <hr /> */}
 
-                      <div class="row align-items-center">
+                      {/* <div class="row align-items-center">
                         <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
                           <i
                             class="fal fa-question-circle text-secondary mr-1"
@@ -172,7 +173,7 @@ function blockContainer({ block }) {
                           {block.signature}
                         </div>
                       </div>
-                      <hr />
+                      <hr /> */}
 
                       <div class="row align-items-center">
                         <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">

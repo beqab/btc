@@ -9,18 +9,19 @@ import ReactPaginate from "react-paginate";
 var qs = require("qs");
 
 const BlockById = ({ match, ...props }) => {
-  const [allBlocks, setAllBlocks] = useState(null);
+  const [allBlocks, setAllBlocks] = useState([]);
   const [blockTime, setBlockTime] = useState(null);
   const [blockError, setBlockError] = useState(null);
 
   useEffect(() => {
     axios
-      .get("block/chains")
+      .get("http://51.255.211.135:8181/block/chains")
       .then((res) => {
         // this.setState({
         //   fetching: false,
         //   allBlocks: res.data.blockchain_state.tips,
         // });
+        // debugger;
         setAllBlocks(res.data);
         // debugger;
       })
@@ -95,6 +96,7 @@ const BlockById = ({ match, ...props }) => {
                     <> */}
                   {allBlocks &&
                     allBlocks.map((el, i) => {
+                      // debugger;
                       return (
                         <>
                           <div className="row">
@@ -119,7 +121,7 @@ const BlockById = ({ match, ...props }) => {
                                   </a>
                                   <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                     {" "}
-                                    {getTimeAfterDate(el.timestamp)}
+                                    {/* {getTimeAfterDate(el.timestamp)} */}
                                   </span>
                                 </div>
                               </div>
@@ -145,7 +147,7 @@ const BlockById = ({ match, ...props }) => {
                                     185 txns{" "}
                                   </a>{" "}
                                   <span className="small text-secondary">
-                                    {getTimeAfterDate(el.timestamp)}
+                                    {/* {getTimeAfterDate(el.timestamp)} */}
                                   </span>
                                   <span className="d-inline-block d-sm-none">
                                     <span
@@ -157,7 +159,7 @@ const BlockById = ({ match, ...props }) => {
                                       {/* {Number(
                                             el.data.total_transaction_fees
                                           ) / 100000000} */}
-                                      Waves
+                                      Wave
                                     </span>{" "}
                                   </span>
                                 </div>
@@ -168,7 +170,7 @@ const BlockById = ({ match, ...props }) => {
                                     title=""
                                     data-original-title="Block Reward"
                                   >
-                                    Waves
+                                    Wave
                                   </span>
                                 </div>
                               </div>

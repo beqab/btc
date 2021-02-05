@@ -3,9 +3,9 @@ import Moment from "react-moment";
 import { Route } from "react-router-dom";
 import GetTimeAfterDate from "../../hepers/getTimeBeforeNow";
 
-function blockContainer({ transaction: block }) {
+function transactionsContainer({ transaction }) {
   // debugger;
-  console.log(block, "propspropsprops");
+  console.log(transaction, "propspropsprops");
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +13,7 @@ function blockContainer({ transaction: block }) {
           <div className="card h-100">
             <div className="card-header newHeader">
               <span className="card-header-title">
-                transaction #{block.transactionName}
+                transaction #{transaction.txId}
               </span>
             </div>
 
@@ -37,13 +37,13 @@ function blockContainer({ transaction: block }) {
                   style={{ position: "relative", top: "0px", left: "0px" }}
                   dir="ltr"
                 >
-                  {block.loading ? (
+                  {transaction.loading ? (
                     <div className="text-center">
                       <img src="https://www.siue.edu/~itoberm/Images/ThinkingAnimate.gif" />
                     </div>
-                  ) : block.hasError ? (
+                  ) : transaction.hasError ? (
                     <div className="alert alert-danger" role="alert">
-                      {block.hasError}
+                      {transaction.hasError}
                     </div>
                   ) : (
                     <>
@@ -63,9 +63,12 @@ function blockContainer({ transaction: block }) {
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
                           &#128341;{" "}
-                          {" " +
-                            GetTimeAfterDate(Number(block?.timestamp))}{" "}
-                          <Moment format="YYYY/MM/DD">{block.time}</Moment>
+                          {GetTimeAfterDate(
+                            Number(transaction?.input?.timestamp)
+                          )}
+                          <Moment format="YYYY/MM/DD">
+                            {transaction.time}
+                          </Moment>
                         </div>
                       </div>
                       <hr />
@@ -80,12 +83,12 @@ function blockContainer({ transaction: block }) {
                             title=""
                             data-content="The date and time at which a block is mined."
                           ></i>
-                          hash:
+                          txId:
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
 
-                          {block.hash}
+                          {transaction.txId}
                         </div>
                       </div>
                       <hr />
@@ -101,16 +104,17 @@ function blockContainer({ transaction: block }) {
                             title=""
                             data-content="The date and time at which a block is mined."
                           ></i>
-                          blockReward:
+                          from:
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-
-                          {block.blockReward}
+                          <a href={"/wallet/" + transaction?.input?.from}>
+                            {transaction?.input?.from}
+                          </a>
                         </div>
                       </div>
                       <hr />
-
+                      {/* 
                       <div class="row align-items-center">
                         <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
                           <i
@@ -130,7 +134,7 @@ function blockContainer({ transaction: block }) {
                           {block.previousHash}
                         </div>
                       </div>
-                      <hr />
+                      <hr /> */}
 
                       <div class="row align-items-center">
                         <div class="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
@@ -143,12 +147,13 @@ function blockContainer({ transaction: block }) {
                             title=""
                             data-content="The date and time at which a block is mined."
                           ></i>
-                          secret:
+                          to:
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-
-                          {block.secret}
+                          <a href={"/wallet/" + transaction?.input?.from}>
+                            {transaction?.input?.from}
+                          </a>
                         </div>
                       </div>
                       <hr />
@@ -164,12 +169,11 @@ function blockContainer({ transaction: block }) {
                             title=""
                             data-content="The date and time at which a block is mined."
                           ></i>
-                          signature:
+                          amount:
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-
-                          {block.signature}
+                          {transaction?.output?.amount} Wave
                         </div>
                       </div>
                       <hr />
@@ -185,12 +189,11 @@ function blockContainer({ transaction: block }) {
                             title=""
                             data-content="The date and time at which a block is mined."
                           ></i>
-                          validator:
+                          fee:
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-
-                          {block.validator}
+                          {transaction?.output?.fee} Wave
                         </div>
                       </div>
                       <hr />
@@ -206,4 +209,4 @@ function blockContainer({ transaction: block }) {
   );
 }
 
-export default blockContainer;
+export default transactionsContainer;

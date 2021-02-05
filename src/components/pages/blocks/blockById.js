@@ -5,6 +5,8 @@ import { Route } from "react-router-dom";
 import { User } from "react-router-dom";
 import GetTimeAfterDate from "../../hepers/getTimeBeforeNow";
 import BlockContainer from "./blockContainer";
+import Transactions from "../transactions/transactionsContainer";
+import TransactionsList from "../transactions/transactionsListContainer";
 
 const BlockById = ({ match, ...props }) => {
   const [blockData, setBlockData] = useState(null);
@@ -16,17 +18,22 @@ const BlockById = ({ match, ...props }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/block/" + match.params?.ID)
+      .get("http://51.255.211.135:8181/block/" + match.params?.ID)
       .then((res) => {
         if (res.data.error) {
           return setBlockError(res.data.error);
         }
-        setBlockData(res.data.header.data);
-        setBlockTime(new Date(res.data.header.data.timestamp * 1000));
-        console.log(new Date(res.data.header.data.timestamp * 1000));
+        setBlockTime(new Date(res.data.timestamp));
+
+        setBlockData(res.data);
+
+        // setBlockData(res.data.header.data);
+        // setBlockTime(new Date(res.data.header.data.timestamp * 1000));
+        // console.log(new Date(res.data00));
         setLoading(false);
       })
       .catch((err) => {
+        // debugger;
         let testObj = {
           previousHash:
             "b974c35b0ef543fac72ccd6ad63a8583c3ee840821a4ac4e334098e13626b087",
@@ -61,24 +68,31 @@ const BlockById = ({ match, ...props }) => {
         };
         setLoading(false);
 
-        setBlockTime(new Date(testObj.timestamp));
-
-        setBlockData(testObj);
         // debugger;
         // setBlockError("server error :/ ");
       });
   }, [match.params?.ID]);
   console.log(blockData, "llllllll");
   return (
-    <BlockContainer
-      block={{
-        ...blockData,
-        time: blockTime,
-        hasError: blockError,
-        blockName: match.params?.ID,
-        loading,
-      }}
-    />
+    <>
+      <BlockContainer
+        block={{
+          ...blockData,
+          time: blockTime,
+          hasError: blockError,
+          blockName: match.params?.ID,
+          loading,
+        }}
+      />
+      <div className="container">
+        <TransactionsList transactions={blockData?.transactions} />
+      </div>
+      {/* 
+      <div className="blockTransactionsSection container">
+        <h4>block transactions</h4>
+        <Transactions />
+      </div> */}
+    </>
     // <div className="container">
     //   <div className="row">
     //     <div className="col-lg-12 mb-12 mb-lg-0 mt-5 pt-5">

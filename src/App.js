@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import logo from "./imgs/logo.svg";
 import logo2 from "./imgs/logo2.png";
 import "./App.css";
@@ -9,7 +9,7 @@ import BlockById from "./components/pages/blocks/blockById";
 import Blocks from "./components/pages/blocks";
 import Transactions from "./components/pages/transactions";
 import TransactionsByID from "./components/pages/transactions/transactionById";
-import Wolet from "./components/pages/wolet";
+import Wallet from "./components/pages/wolet";
 function App() {
   return (
     <>
@@ -117,12 +117,14 @@ function App() {
             </ul>
           </div>
         </nav> */}
-        <Route exact path="/" component={Search} />
-        <Route exact path="/block/:ID" component={BlockById} />
-        <Route exact path="/transaction/:ID" component={TransactionsByID} />
-        <Route exact path="/blocks" component={Blocks} />
-        <Route exact path="/transactions" component={Transactions} />
-        <Route exact path="/wolet/:id" component={Wolet} />
+        <Switch>
+          <Route exact path="/" component={Search} />
+          <Route exact path="/block/:ID" component={BlockById} />
+          <Route exact path="/transaction/:ID" component={TransactionsByID} />
+          <Route exact path="/blocks" component={Blocks} />
+          <Route exact path="/transactions" component={Transactions} />
+          <Route exact path="/wallet/:ID" component={Wallet} />
+        </Switch>
         {/* <Search /> */}
       </div>
       <footer className="page-footer font-small unique-color-dark pt-4">

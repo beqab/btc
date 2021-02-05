@@ -97,7 +97,7 @@ class Search extends React.Component {
     // });
 
     axios
-      .get("/chain")
+      .get("http://51.255.211.135:8181/chain")
       .then((res) => {
         this.setState({
           fetching: false,
@@ -141,7 +141,9 @@ class Search extends React.Component {
     e.preventDefault();
     this.clearRes();
     axios
-      .get(`/transaction/by/${this.state.TransactionID}`)
+      .get(
+        `http://51.255.211.135:8181/transaction/by/${this.state.TransactionID}`
+      )
       .then((res) => {
         this.setState({
           transactionData: res.data,
@@ -528,8 +530,8 @@ class Search extends React.Component {
     if (this.state.searchType === "block") {
       this.props.history.push(`/block/${this.state.searchValue}`);
     }
-    if (this.state.searchType === "wolet") {
-      this.props.history.push(`/wolet/${this.state.searchValue}`);
+    if (this.state.searchType === "wallet") {
+      this.props.history.push(`/wallet/${this.state.searchValue}`);
     }
     if (this.state.searchType === "transaction") {
       this.props.history.push(`/transaction/${this.state.searchValue}`);
@@ -539,8 +541,8 @@ class Search extends React.Component {
   render() {
     return (
       <>
-        <div className="searchWrapper">
-          <div className="container">
+        <div className="searchWrapper ">
+          <div className="container py-4">
             <form
               onSubmit={this.submitSearch}
               className="row d-flex flex-column pb-4 pl-4"
@@ -559,7 +561,7 @@ class Search extends React.Component {
                   }}
                 >
                   <option value="block">block</option>
-                  <option value="wolet">address</option>
+                  <option value="Wallet">address</option>
                   <option value="transaction">Txn Hash</option>
                 </select>
                 <input
@@ -592,109 +594,6 @@ class Search extends React.Component {
                 </button>
               </div>
             </form>
-            <div className="row">
-              <div className="col-md-4">
-                <div className="card">
-                  <h5
-                    className="card-header "
-                    onClick={() => this.byBlockId(12)}
-                  >
-                    search block
-                  </h5>
-                  <div className="card-body">
-                    {/* <h5 className="card-title">Search ny block number</h5> */}
-                    <h5 className="card-text">block number</h5>
-                    <form
-                      onSubmit={this.handelSubmitSearchBlock}
-                      className="form-inline"
-                    >
-                      <input
-                        className="form-control searchInput mr-sm-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                        name="blockNumber"
-                        onChange={this.handleInputChange}
-                      />
-                      <button
-                        disabled={this.state.fetching}
-                        className="btn btn-outline-success searchButton my-2 my-sm-0"
-                        type="submit"
-                      >
-                        Search
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="card">
-                  <h5 className="card-header">search account</h5>
-                  <div className="card-body">
-                    {/* <p className="card-text">search account</p> */}
-                    <h5 className="card-title">account number or ID</h5>
-                    <form
-                      onSubmit={(e) => {
-                        this.handelSubmitSearchWallet(e);
-                        this.handelSubmitTransactions(e);
-                      }}
-                      className="form-inline"
-                    >
-                      <input
-                        className="form-control searchInput mr-sm-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                        name="accountNumber"
-                        onChange={this.handleInputChange}
-                      />
-                      <button
-                        disabled={this.state.fetching}
-                        className="btn searchButton btn-outline-success my-2 my-sm-0"
-                        type="submit"
-                      >
-                        Search
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="card">
-                  <h5 className="card-header">Search transaction hash</h5>
-                  <div className="card-body">
-                    {/* <p className="card-text">Search transaction information</p> */}
-                    <h5 className="card-title">Transaction ID</h5>
-                    <form
-                      onSubmit={(e) => {
-                        this.handelSubmitTransaction(
-                          e,
-                          "/transaction/by/",
-                          "TransactionID"
-                        );
-                      }}
-                      className="form-inline"
-                    >
-                      <input
-                        className="form-control searchInput mr-sm-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                        name="TransactionID"
-                        onChange={this.handleInputChange}
-                      />
-                      <button
-                        disabled={this.state.fetching}
-                        className="btn searchButton btn-outline-success my-2 my-sm-0"
-                        type="submit"
-                      >
-                        Search
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div className="container  pt-5">
@@ -794,7 +693,7 @@ class Search extends React.Component {
                                           {/* {Number(
                                             el.data.total_transaction_fees
                                           ) / 100000000} */}
-                                          Waves
+                                          Wave
                                         </span>{" "}
                                       </span>
                                     </div>
@@ -805,7 +704,7 @@ class Search extends React.Component {
                                         title=""
                                         data-original-title="Block Reward"
                                       >
-                                        Waves
+                                        Wave
                                       </span>
                                     </div>
                                   </div>
@@ -847,7 +746,7 @@ class Search extends React.Component {
                 <div className="card-footer p-3">
                   <a
                     className="btn btnBluGradient w-75 m-auto  btn-xs btn-block btn-soft-primary"
-                    href="/blocks"
+                    href="/blocks?page=0"
                   >
                     View all blocks
                   </a>
@@ -926,7 +825,7 @@ class Search extends React.Component {
                                         <a
                                           className="hash-tag text-truncate"
                                           href={
-                                            "wolet/" +
+                                            "Wallet/" +
                                             el.transactions[0].input.from
                                           }
                                         >
@@ -943,7 +842,7 @@ class Search extends React.Component {
                                         <a
                                           className=" hash-tag text-truncate"
                                           href={
-                                            "wolet/" +
+                                            "wallet/" +
                                             el.transactions[0].output.to
                                           }
                                         >
@@ -971,7 +870,7 @@ class Search extends React.Component {
                                         data-original-title="Block Reward"
                                       >
                                         fee: {el.transactions[0].output.fee}{" "}
-                                        Waves
+                                        Wave
                                       </span>
                                     </div>
                                   </div>
@@ -1013,7 +912,7 @@ class Search extends React.Component {
                 <div className="card-footer p-3">
                   <a
                     className="btn btn-xs  btnBluGradient w-75 m-auto  btn-block btn-soft-primary"
-                    href="/transactions"
+                    href="/transactions?page=0"
                   >
                     View all transactions
                   </a>

@@ -12,17 +12,19 @@ function TransactionById({ match }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/transaction/" + match.params?.ID)
+      .get("http://51.255.211.135:8181/transactions/" + match.params?.ID)
       .then((res) => {
         if (res.data.error) {
           return setTransactionError(res.data.error);
         }
-        setTransactionData(res.data.header.data);
-        setTransactionTime(new Date(res.data.header.data.timestamp * 1000));
-        console.log(new Date(res.data.header.data.timestamp * 1000));
+        setTransactionData(res.data);
+        setTransactionTime(new Date(res.data.input.timestamp));
+        // console.log(new Date(res.data.header.data.timestamp * 1000));
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
+
         let testObj = {
           previousHash:
             "b974c35b0ef543fac72ccd6ad63a8583c3ee840821a4ac4e334098e13626b087",
@@ -55,11 +57,11 @@ function TransactionById({ match }) {
           signature:
             "TQhP0q3O/7GMlNuDR6EmU2i/JJ4RAuPEfmVpdo3Dtwvb92OAC+0SHS+1Udl3tqp7BrpFnT0blMIgYD3/sU0Euw==",
         };
-        setLoading(false);
+        // setLoading(false);
 
-        setTransactionTime(new Date(testObj.timestamp));
+        // setTransactionTime(new Date(testObj.timestamp));
 
-        setTransactionData(testObj);
+        // setTransactionData(testObj);
         // debugger;
         // transactionError("server error :/ ");
       });
