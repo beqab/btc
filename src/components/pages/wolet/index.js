@@ -22,7 +22,6 @@ function Index({ match }) {
           ...res.data.transactions.INCOMING,
           ...res.data.transactions.OUTGOING,
         ]);
-        setWalletTime(new Date(res.data.input.timestamp));
         // console.log(new Date(res.data.header.data.timestamp * 1000));
         setLoading(false);
       })
