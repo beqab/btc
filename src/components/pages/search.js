@@ -525,12 +525,14 @@ class Search extends React.Component {
     );
   };
 
-  submitSearch = () => {
+  submitSearch = (e) => {
+    e.preventDefault();
+    debugger;
     console.log(this.state.searchType, this.state.searchValue);
     if (this.state.searchType === "block") {
       this.props.history.push(`/block/${this.state.searchValue}`);
     }
-    if (this.state.searchType === "wallet") {
+    if (this.state.searchType === "Wallet") {
       this.props.history.push(`/wallet/${this.state.searchValue}`);
     }
     if (this.state.searchType === "transaction") {
@@ -821,7 +823,7 @@ class Search extends React.Component {
                                   <div className="d-flex justify-content-between">
                                     <div className="text-nowrap">
                                       <span className="d-block mb-1 mb-sm-0">
-                                        from
+                                        from{" "}
                                         <a
                                           className="hash-tag text-truncate"
                                           href={

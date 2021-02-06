@@ -35,48 +35,55 @@ function Index({ match }) {
 
         // setWalletData(testObj);
         // debugger;
-        // WalletError("server error :/ ");
+        setWalletError("Wallet not fond ");
       });
   }, [match.params?.ID]);
   return (
     <div className="mt-5 pt-4">
-      <h3 className="w700 mb-4 text-center text-sm-left">Address</h3>
-      <div className="w700  d-md-flex d-block address ">
-        <div className="test-sm-centre">
-          <img
-            className="qrImg"
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${WalletData?.pubKey}`}
-          />
+      <h3 className="w700 mb-4 text-center  text-sm-left">Address</h3>
+      {WalletError ? (
+        <div className="alert alert-danger w700" role="alert">
+          {WalletError}
         </div>
-        <div className=" pl-0 pl-md-3 test-sm-centre">
-          <h5 className="font-sm-14 walletAddress ">
-            address: <span> {WalletData?.pubKey}</span>
-          </h5>
-          <h5 className="font-sm-14">balance: {WalletData?.balance} Wave</h5>
-          <h5 className="font-sm-14">
-            blocked: {WalletData?.blocked}
-            {/* {this.state.transactionsData &&
-                  this.state.transactionsData.transactions.length} */}
-          </h5>
+      ) : (
+        <div className="w700  d-md-flex d-block address ">
+          <div className="test-sm-centre">
+            <img
+              className="qrImg"
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${WalletData?.pubKey}`}
+            />
+          </div>
 
-          <h5 className="font-sm-14">
-            pending: {WalletData?.pending}
-            {/* {this.state.transactionsData &&
+          <div className=" pl-0 pl-md-3 test-sm-centre">
+            <h5 className="font-sm-14 walletAddress ">
+              address: <span> {WalletData?.pubKey}</span>
+            </h5>
+            <h5 className="font-sm-14">balance: {WalletData?.balance} Wave</h5>
+            <h5 className="font-sm-14">
+              blocked: {WalletData?.blocked}
+              {/* {this.state.transactionsData &&
+                  this.state.transactionsData.transactions.length} */}
+            </h5>
+
+            <h5 className="font-sm-14">
+              pending: {WalletData?.pending}
+              {/* {this.state.transactionsData &&
                   this.calcTotalReceivedSent(
                     this.state.transactionsData.transactions,
                     this.state.walletData.address
                   ).Sent} */}
-          </h5>
-          <h5 className="font-sm-14">
-            state : {WalletData?.state}
-            {/* {this.state.transactionsData &&
+            </h5>
+            <h5 className="font-sm-14">
+              state : {WalletData?.state}
+              {/* {this.state.transactionsData &&
                   this.calcTotalReceivedSent(
                     this.state.transactionsData.transactions,
                     this.state.walletData.address
                   ).Received} */}
-          </h5>
+            </h5>
+          </div>
         </div>
-      </div>
+      )}
       <div className="container">
         <TransactionsListContainer transactions={walletTransactions} />
       </div>
