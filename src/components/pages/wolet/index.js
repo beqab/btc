@@ -72,14 +72,6 @@ function Index({ match }) {
                     this.state.walletData.address
                   ).Sent} */}
             </h5>
-            <h5 className="font-sm-14">
-              state : {WalletData?.state}
-              {/* {this.state.transactionsData &&
-                  this.calcTotalReceivedSent(
-                    this.state.transactionsData.transactions,
-                    this.state.walletData.address
-                  ).Received} */}
-            </h5>
           </div>
         </div>
       )}
