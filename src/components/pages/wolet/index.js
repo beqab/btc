@@ -17,7 +17,11 @@ function Index({ match }) {
         if (res.data.error) {
           return setWalletError(res.data.error);
         }
-        setWalletData(res.data);
+        setWalletData(res.data.wallet);
+        setWalletTransactions([
+          ...res.data.transactions.INCOMING,
+          ...res.data.transactions.OUTGOING,
+        ]);
         setWalletTime(new Date(res.data.input.timestamp));
         // console.log(new Date(res.data.header.data.timestamp * 1000));
         setLoading(false);
@@ -36,7 +40,7 @@ function Index({ match }) {
   }, [match.params?.ID]);
   return (
     <div className="mt-5 pt-4">
-      <h3 className="w700 mb-4">Address</h3>
+      <h3 className="w700 mb-4 text-center text-sm-left">Address</h3>
       <div className="w700  d-md-flex d-block address ">
         <div className="test-sm-centre">
           <img
@@ -45,7 +49,9 @@ function Index({ match }) {
           />
         </div>
         <div className=" pl-0 pl-md-3 test-sm-centre">
-          <h5 className="font-sm-14 ">address: {WalletData?.pubKey}</h5>
+          <h5 className="font-sm-14 walletAddress ">
+            address: <span> {WalletData?.pubKey}</span>
+          </h5>
           <h5 className="font-sm-14">balance: {WalletData?.balance} Wave</h5>
           <h5 className="font-sm-14">
             blocked: {WalletData?.blocked}
@@ -72,7 +78,7 @@ function Index({ match }) {
         </div>
       </div>
       <div className="container">
-        <TransactionsListContainer />
+        <TransactionsListContainer transactions={walletTransactions} />
       </div>
     </div>
   );

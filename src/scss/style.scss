@@ -120,6 +120,16 @@ footer {
   .searchBox input {
     width: calc(100vw - 190px);
   }
+
+  .walletAddress {
+    text-align: center;
+    span {
+      font-size: 12px;
+    }
+  }
+  .text-truncate {
+    max-width: calc(100vw - 135px);
+  }
 }
 
 .hathOverflow {
