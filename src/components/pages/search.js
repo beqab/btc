@@ -118,6 +118,33 @@ class Search extends React.Component {
           });
         }
       });
+
+    axios
+      .post(
+        "http://51.255.211.135:8181/wallet/sign-in",
+        {
+          secret:
+            "bless fiction fame tell crater maze february fault long maid bring legend",
+        },
+        {
+          withCredentials: "omit",
+        }
+      )
+      .then((res) => {
+        debugger;
+        axios.post(
+          "http://51.255.211.135:8181/wallet/transact",
+          {
+            to:
+              "37e31578af0233e850e163825cd64d9c4c3dc0e951dd08591180c8d3a8872131",
+            amount: 1.1,
+            type: "transaction",
+          },
+          {
+            withCredentials: "omit",
+          }
+        );
+      });
   }
 
   handleInputChange = (e) => {
@@ -632,6 +659,9 @@ class Search extends React.Component {
                         this.state.allBlocks.length &&
                         this.state.allBlocks.map((el, i) => {
                           // if (!el.transactions.length) return;
+                          // {this.getTimeAfterDate(el.timestamp)}
+
+                          const time = new Date(el.timestamp);
 
                           return (
                             <>
@@ -657,7 +687,29 @@ class Search extends React.Component {
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                         {" "}
-                                        {this.getTimeAfterDate(el.timestamp)}
+                                        <div
+                                          style={{
+                                            // color: "#ffffff8c",
+                                            fontSize: "12px",
+                                            // lineHeight: "9px",
+                                          }}
+                                          className="right"
+                                        >
+                                          {" "}
+                                          {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                          {time.getFullYear() +
+                                            "/" +
+                                            (time.getMonth() + 1) +
+                                            "/" +
+                                            time.getDate()}
+                                          <br />
+                                          {time.getHours() +
+                                            ":" +
+                                            time.getMinutes() +
+                                            ":" +
+                                            time.getSeconds()}
+                                          {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
+                                        </div>
                                       </span>
                                     </div>
                                   </div>
@@ -683,7 +735,7 @@ class Search extends React.Component {
                                         185 txns{" "}
                                       </a>{" "}
                                       <span className="small text-secondary">
-                                        {this.getTimeAfterDate(el.timestamp)}
+                                        {/* {this.getTimeAfterDate(el.timestamp)} */}
                                       </span>
                                       <span className="d-inline-block d-sm-none">
                                         <span
@@ -784,6 +836,10 @@ class Search extends React.Component {
                         this.state.allBlocks.length &&
                         this.state.allBlocks.map((el, i) => {
                           if (!el.transactions.length) return;
+
+                          const time = new Date(
+                            el.transactions[0].input.timestamp
+                          );
                           return (
                             <>
                               {" "}
@@ -812,9 +868,32 @@ class Search extends React.Component {
                                       </a>
                                       <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                         {" "}
-                                        {this.getTimeAfterDate(
-                                          el.transactions[0].input.timestamp
-                                        )}
+                                        {/* {this.getTimeAfterDate(
+                                          
+                                        )} */}
+                                        <div
+                                          style={{
+                                            // color: "#ffffff8c",
+                                            fontSize: "12px",
+                                            // lineHeight: "9px",
+                                          }}
+                                          className="right"
+                                        >
+                                          {" "}
+                                          {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                          {time.getFullYear() +
+                                            "/" +
+                                            (time.getMonth() + 1) +
+                                            "/" +
+                                            time.getDate()}
+                                          <br />
+                                          {time.getHours() +
+                                            ":" +
+                                            time.getMinutes() +
+                                            ":" +
+                                            time.getSeconds()}
+                                          {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
+                                        </div>
                                       </span>
                                     </div>
                                   </div>
@@ -864,7 +943,16 @@ class Search extends React.Component {
                                         </span>{" "}
                                       </span> */}
                                     </div>
-                                    <div className="d-none d-sm-block">
+                                    <div className="d-none d-sm-flex flex-column">
+                                      <span
+                                        className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
+                                        data-toggle="tooltip"
+                                        title=""
+                                        data-original-title="Block Reward"
+                                      >
+                                        Tx: {el.transactions[0].output.amount}{" "}
+                                        Wave
+                                      </span>
                                       <span
                                         className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
                                         data-toggle="tooltip"

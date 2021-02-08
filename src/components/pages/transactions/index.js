@@ -170,6 +170,9 @@ const BlockById = ({ match, ...props }) => {
                     >
                       {allBlocks.map((el, i) => {
                         // debugger;
+
+                        const time = new Date(el.input.timestamp);
+
                         return (
                           <>
                             <div className="row">
@@ -194,7 +197,30 @@ const BlockById = ({ match, ...props }) => {
                                     </a>
                                     <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                       {" "}
-                                      {getTimeAfterDate(el.input.timestamp)}
+                                      <div
+                                        style={{
+                                          // color: "#ffffff8c",
+                                          fontSize: "12px",
+                                          // lineHeight: "9px",
+                                        }}
+                                        className="right"
+                                      >
+                                        {" "}
+                                        {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                        {time.getFullYear() +
+                                          "/" +
+                                          (time.getMonth() + 1) +
+                                          "/" +
+                                          time.getDate()}
+                                        <br />
+                                        {time.getHours() +
+                                          ":" +
+                                          time.getMinutes() +
+                                          ":" +
+                                          time.getSeconds()}
+                                        {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
+                                      </div>
+                                      {/* {getTimeAfterDate(el.input.timestamp)} */}
                                     </span>
                                   </div>
                                 </div>
@@ -238,9 +264,17 @@ const BlockById = ({ match, ...props }) => {
                                         </span>{" "}
                                       </span> */}
                                   </div>
-                                  <div className="d-none d-sm-block">
+                                  <div className="d-none d-sm-flex flex-column text-right">
                                     <span
                                       className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
+                                      data-toggle="tooltip"
+                                      title=""
+                                      data-original-title="Block Reward"
+                                    >
+                                      Tx: {el.output.amount} Wave
+                                    </span>
+                                    <span
+                                      className="u-label u-label--xs u-label--badge-in u-label--secondary text-right text-nowrap"
                                       data-toggle="tooltip"
                                       title=""
                                       data-original-title="Block Reward"

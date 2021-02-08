@@ -131,6 +131,8 @@ const BlockById = ({ match, ...props }) => {
                     >
                       {allBlocks.map((el, i) => {
                         // debugger;
+
+                        const time = new Date(el.timestamp);
                         return (
                           <>
                             <div className="row">
@@ -156,6 +158,29 @@ const BlockById = ({ match, ...props }) => {
                                     <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
                                       {" "}
                                       {/* {getTimeAfterDate(el.timestamp)} */}
+                                      <div
+                                        style={{
+                                          // color: "#ffffff8c",
+                                          fontSize: "12px",
+                                          // lineHeight: "9px",
+                                        }}
+                                        className="right"
+                                      >
+                                        {" "}
+                                        {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                        {time.getFullYear() +
+                                          "/" +
+                                          (time.getMonth() + 1) +
+                                          "/" +
+                                          time.getDate()}
+                                        <br />
+                                        {time.getHours() +
+                                          ":" +
+                                          time.getMinutes() +
+                                          ":" +
+                                          time.getSeconds()}
+                                        {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
+                                      </div>
                                     </span>
                                   </div>
                                 </div>

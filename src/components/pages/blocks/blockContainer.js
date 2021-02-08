@@ -6,6 +6,7 @@ import GetTimeAfterDate from "../../hepers/getTimeBeforeNow";
 function blockContainer({ block }) {
   // debugger;
   console.log(block, "propspropsprops");
+  // const time = new
   return (
     <div className="container">
       <div className="row">
@@ -63,9 +64,9 @@ function blockContainer({ block }) {
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
                           &#128341;{" "}
-                          {" " +
-                            GetTimeAfterDate(Number(block?.timestamp))}{" "}
-                          <Moment format="YYYY/MM/DD">{block.time}</Moment>
+                          <Moment format="YYYY/MM/DD HH:mm:ss">
+                            {block.time}
+                          </Moment>
                         </div>
                       </div>
                       <hr />

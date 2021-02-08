@@ -63,10 +63,7 @@ function transactionsContainer({ transaction }) {
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
                           &#128341;{" "}
-                          {GetTimeAfterDate(
-                            Number(transaction?.input?.timestamp)
-                          )}
-                          <Moment format="YYYY/MM/DD">
+                          <Moment format="YYYY/MM/DD HH:mm:ss">
                             {transaction.time}
                           </Moment>
                         </div>
