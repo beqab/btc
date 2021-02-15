@@ -122,125 +122,89 @@ const BlockById = ({ match, ...props }) => {
                     </div>
                   ) : (
                     <> */}
-                  {allBlocks && (
-                    <InfiniteScroll
-                      dataLength={allBlocks.length}
-                      setPage={(d) => {
-                        debugger;
-                      }}
-                    >
-                      {allBlocks.map((el, i) => {
-                        // debugger;
 
+                  <table class="table waveTable">
+                    <thead>
+                      <tr>
+                        <th> Block</th>
+                        <th>Date</th>
+                        <th>Txn</th>
+                        <th>Miner</th>
+                        <th>Reward</th>
+                        {/* <th>To</th>
+                    <th>Value</th>
+                    <th>Txn Fee</th> */}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {allBlocks.map((el, i) => {
                         const time = new Date(el.timestamp);
+
                         return (
-                          <>
-                            <div className="row">
-                              <div className="col-sm-4">
-                                <div className="media align-items-sm-center mr-4 mb-1 mb-sm-0">
-                                  <div className="d-none d-sm-flex mr-2">
-                                    <span className="btn btn-icon btn-soft-secondary">
-                                      <span className="btn-icon__inner text-dark">
-                                        Bk
-                                      </span>
-                                    </span>
-                                  </div>
-                                  <div className="media-body">
-                                    <span className="d-inline-block d-sm-none">
-                                      Block
-                                    </span>{" "}
-                                    <a
-                                      className="hathOverflow"
-                                      href={/block/ + el.hash}
-                                    >
-                                      {el.hash}
-                                    </a>
-                                    <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
-                                      {" "}
-                                      {/* {getTimeAfterDate(el.timestamp)} */}
-                                      <div
-                                        style={{
-                                          // color: "#ffffff8c",
-                                          fontSize: "12px",
-                                          // lineHeight: "9px",
-                                        }}
-                                        className="right"
-                                      >
-                                        {" "}
-                                        {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
-                                        {time.getFullYear() +
-                                          "/" +
-                                          (time.getMonth() + 1) +
-                                          "/" +
-                                          time.getDate()}
-                                        <br />
-                                        {time.getHours() +
-                                          ":" +
-                                          time.getMinutes() +
-                                          ":" +
-                                          time.getSeconds()}
-                                        {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
-                                      </div>
-                                    </span>
-                                  </div>
+                          <tr>
+                            <td>
+                              <a
+                                className="hathOverflow"
+                                href={/block/ + el.hash}
+                              >
+                                {el.hash}
+                              </a>
+                            </td>
+                            <td>
+                              <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
+                                {" "}
+                                <div
+                                  style={{
+                                    // color: "#ffffff8c",
+                                    fontSize: "12px",
+                                    // lineHeight: "9px",
+                                  }}
+                                  className="right"
+                                >
+                                  {" "}
+                                  {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                  {time.getFullYear() +
+                                    "/" +
+                                    (time.getMonth() + 1) +
+                                    "/" +
+                                    time.getDate() +
+                                    " "}
+                                  {time.getHours() +
+                                    ":" +
+                                    time.getMinutes() +
+                                    ":" +
+                                    time.getSeconds()}
+                                  {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
                                 </div>
-                              </div>
-                              <div className="col-sm-8">
-                                <div className="d-flex justify-content-between">
-                                  <div className="text-nowrap">
-                                    <span className="d-block mb-1 mb-sm-0">
-                                      Miner{" "}
-                                      <a
-                                        className="hash-tag text-truncate"
-                                        href="#"
-                                      >
-                                        {el.validator}
-                                      </a>
-                                    </span>
-                                    <a
-                                      href="/txs?block=11627830"
-                                      data-toggle="tooltip"
-                                      title=""
-                                      data-original-title="Transactions in this Block"
-                                    >
-                                      185 txns{" "}
-                                    </a>{" "}
-                                    <span className="small text-secondary">
-                                      {/* {getTimeAfterDate(el.timestamp)} */}
-                                    </span>
-                                    <span className="d-inline-block d-sm-none">
-                                      <span
-                                        className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
-                                        data-toggle="tooltip"
-                                        title=""
-                                        data-original-title="Block Reward"
-                                      >
-                                        {/* {Number(
-                                            el.data.total_transaction_fees
-                                          ) / 100000000} */}
-                                        Wave
-                                      </span>{" "}
-                                    </span>
-                                  </div>
-                                  <div className="d-none d-sm-block">
-                                    <span
-                                      className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
-                                      data-toggle="tooltip"
-                                      title=""
-                                      data-original-title="Block Reward"
-                                    >
-                                      Wave
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <hr className="hr-space" />
-                          </>
+                                {/* {getTimeAfterDate(el.input.timestamp)} */}
+                              </span>
+                            </td>
+
+                            <td>
+                              <a
+                                className="hash-tag text-truncate"
+                                href={/block/ + el.hash}
+                              >
+                                {el.transactions.length}
+                              </a>
+                            </td>
+
+                            <td>
+                              {" "}
+                              <a
+                                className="hash-tag text-truncate"
+                                href="#"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                {el.validator}{" "}
+                              </a>{" "}
+                            </td>
+                            <td>{el.blockReward} Wave </td>
+                          </tr>
                         );
                       })}
-                    </InfiniteScroll>
-                  )}
+                    </tbody>
+                  </table>
                   <div className="text-center w-100">
                     <button
                       onClick={() => {
@@ -252,6 +216,7 @@ const BlockById = ({ match, ...props }) => {
                     </button>
                   </div>
                 </div>
+
                 {/* 
                 <ReactPaginate
                   previousLabel={"previous"}

@@ -58,10 +58,14 @@ const BlockById = ({ match, ...props }) => {
 
         let transacs = [];
         res.data.map((el) => {
-          transacs = [...transacs, ...el.transactions];
+          const transactions = el.transactions.map((trx) => ({
+            ...trx,
+            blockId: el.hash,
+          }));
+          transacs = [...transacs, ...transactions];
         });
 
-        debugger;
+        // debugger;
         setAllBlocks([...allBlocks, ...transacs]);
         // debugger;
       })
@@ -161,136 +165,109 @@ const BlockById = ({ match, ...props }) => {
                     </div>
                   ) : (
                     <> */}
-                  {allBlocks && (
-                    <InfiniteScroll
-                      dataLength={allBlocks.length}
-                      setPage={(d) => {
-                        debugger;
-                      }}
-                    >
-                      {allBlocks.map((el, i) => {
-                        // debugger;
 
+                  <table class="table waveTable">
+                    <thead>
+                      <tr>
+                        <th> Txn Hash</th>
+                        <th>Block</th>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Value</th>
+                        <th>Txn Fee</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {allBlocks.map((el, i) => {
                         const time = new Date(el.input.timestamp);
 
                         return (
-                          <>
-                            <div className="row">
-                              <div className="col-sm-4">
-                                <div className="media align-items-sm-center mr-4 mb-1 mb-sm-0">
-                                  <div className="d-none d-sm-flex mr-2">
-                                    <span className="btn btn-icon btn-soft-secondary">
-                                      <span className="btn-icon__inner text-dark">
-                                        Tx
-                                      </span>
-                                    </span>
-                                  </div>
-                                  <div className="media-body">
-                                    <span className="d-inline-block d-sm-none">
-                                      Block
-                                    </span>{" "}
-                                    <a
-                                      className="hathOverflow"
-                                      href={/transaction/ + el.txId}
-                                    >
-                                      {el.txId}
-                                    </a>
-                                    <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
-                                      {" "}
-                                      <div
-                                        style={{
-                                          // color: "#ffffff8c",
-                                          fontSize: "12px",
-                                          // lineHeight: "9px",
-                                        }}
-                                        className="right"
-                                      >
-                                        {" "}
-                                        {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
-                                        {time.getFullYear() +
-                                          "/" +
-                                          (time.getMonth() + 1) +
-                                          "/" +
-                                          time.getDate()}
-                                        <br />
-                                        {time.getHours() +
-                                          ":" +
-                                          time.getMinutes() +
-                                          ":" +
-                                          time.getSeconds()}
-                                        {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
-                                      </div>
-                                      {/* {getTimeAfterDate(el.input.timestamp)} */}
-                                    </span>
-                                  </div>
+                          <tr>
+                            <td>
+                              <span>
+                                {" "}
+                                <a
+                                  className="hathOverflow"
+                                  href={/transaction/ + el.txId}
+                                  data-toggle="tooltip"
+                                  data-placement="top"
+                                  title={el.txId}
+                                >
+                                  {el.txId}
+                                </a>
+                              </span>
+                            </td>
+                            <td>
+                              <a
+                                className="hathOverflow"
+                                href={/block/ + el.blockId}
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title={el.blockId}
+                              >
+                                {el.blockId}
+                              </a>
+                            </td>
+                            <td>
+                              <span className="d-sm-block small text-secondary ml-1 ml-sm-0 text-nowrap">
+                                {" "}
+                                <div
+                                  style={{
+                                    // color: "#ffffff8c",
+                                    fontSize: "12px",
+                                    // lineHeight: "9px",
+                                  }}
+                                  className="right"
+                                >
+                                  {" "}
+                                  {/* <Moment format="YYYY/MM/DD">{time}</Moment> */}
+                                  {time.getFullYear() +
+                                    "/" +
+                                    (time.getMonth() + 1) +
+                                    "/" +
+                                    time.getDate() +
+                                    " "}
+                                  {time.getHours() +
+                                    ":" +
+                                    time.getMinutes() +
+                                    ":" +
+                                    time.getSeconds()}
+                                  {/* <Moment format="HH:mm:ss ">{time}</Moment> */}
                                 </div>
-                              </div>
-                              <div className="col-sm-8">
-                                <div className="d-flex justify-content-between">
-                                  <div className="text-nowrap">
-                                    <span className="d-block mb-1 mb-sm-0">
-                                      from
-                                      <a
-                                        className="hash-tag text-truncate"
-                                        href={"Wallet/" + el.input.from}
-                                      >
-                                        {el.input.from}
-                                      </a>
-                                    </span>
-                                    <div
-                                      href="/txs?block=11627830"
-                                      data-toggle="tooltip"
-                                      title=""
-                                      data-original-title="Transactions in this Block"
-                                    >
-                                      to{" "}
-                                      <a
-                                        className=" hash-tag text-truncate"
-                                        href={"wallet/" + el.output.to}
-                                      >
-                                        {el.output.to}
-                                      </a>
-                                    </div>{" "}
-                                    <span className="small text-secondary"></span>
-                                    {/* <span className="d-inline-block d-sm-none">
-                                        <span
-                                          className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
-                                          data-toggle="tooltip"
-                                          title=""
-                                          data-original-title="Block Reward"
-                                        >
-                                          fee: {el.output.fee}{" "}
-                                          Waves
-                                        </span>{" "}
-                                      </span> */}
-                                  </div>
-                                  <div className="d-none d-sm-flex flex-column text-right">
-                                    <span
-                                      className="u-label u-label--xs u-label--badge-in u-label--secondary text-center text-nowrap"
-                                      data-toggle="tooltip"
-                                      title=""
-                                      data-original-title="Block Reward"
-                                    >
-                                      Tx: {el.output.amount} Wave
-                                    </span>
-                                    <span
-                                      className="u-label u-label--xs u-label--badge-in u-label--secondary text-right text-nowrap"
-                                      data-toggle="tooltip"
-                                      title=""
-                                      data-original-title="Block Reward"
-                                    >
-                                      fee: {el.output.fee} Wave
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <hr className="hr-space" />
-                          </>
+                                {/* {getTimeAfterDate(el.input.timestamp)} */}
+                              </span>
+                            </td>
+                            <td>
+                              <a
+                                className="hash-tag text-truncate"
+                                href={"Wallet/" + el.input.from}
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title={el.input.from}
+                              >
+                                {el.input.from}
+                              </a>
+                            </td>
+                            <td>
+                              <a
+                                className=" hash-tag text-truncate"
+                                href={"wallet/" + el.output.to}
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title={el.output.to}
+                              >
+                                {el.output.to}
+                              </a>
+                            </td>
+                            <td>{el.output.amount} Wave</td>
+                            <td> {el.output.fee}</td>
+                          </tr>
                         );
                       })}
-                    </InfiniteScroll>
-                  )}
+                    </tbody>
+                  </table>
+
                   <div className="text-center w-100">
                     <button
                       onClick={() => {
