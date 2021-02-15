@@ -167,3 +167,30 @@ footer {
     }
   }
 }
+
+.navbar-nav {
+  > li {
+    position: relative;
+    &:hover {
+      > ul {
+        display: block;
+      }
+    }
+    ul {
+      display: none;
+      padding: 10px 0;
+      position: absolute;
+      background: #fff;
+      border-top: 2px solid #40b0d9;
+      white-space: nowrap;
+      list-style: none;
+      padding-left: 0;
+      right: 0;
+      li {
+        margin-bottom: 10px;
+        padding-right: 40px;
+        padding-left: 40px;
+      }
+    }
+  }
+}

@@ -47,14 +47,45 @@ function App() {
               <div className="navbar-collapse collapse" id="navb">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="/blocks">
-                      blocks
+                    <a className="nav-link" href="/">
+                      Home
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/transactions">
-                      transactions
+                    <a className="nav-link" href="/blocks">
+                      Blockchain &#11206;
                     </a>
+                    <ul>
+                      <li>
+                        <a href="/transactions?page=0">View Txns</a>
+                      </li>
+                      <li>
+                        <a href="">View Pending Txns</a>
+                      </li>
+                      <hr />
+                      <li>
+                        <a href="/blocks?page=0">View Blocks</a>
+                      </li>
+                      <li>
+                        <a href="">Top Accounts</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/transactions">
+                      Tokens &#11206;
+                    </a>
+
+                    <ul>
+                      <li>
+                        <a href="/transactions?page=0">
+                          WAECHAIN Tokens (Coming Soon)
+                        </a>
+                      </li>
+                      <li>
+                        <a href="">View Transfers (Coming Soon)</a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
                 {/* <button className="brn btn-default ml-5 btnBluGradient">
@@ -135,15 +166,34 @@ function App() {
                 <img src={logo} /> Powered by WAVE © 2020 Copyright
               </div>
             </div>
-            <div className="col-12 col-md-6 text-center font-wight">
+            <div className="col-12 col-md-3 text-left font-wight">
+              <h5 style={{ color: "#fff", textAlign: "left" }}>Ecosystem</h5>
               <div>
-                <a href="#">Lorem ipsum dolor sit ame</a>
+                <a href="https://www.waveplatform.io/" target="_blank">
+                  Platform
+                </a>
               </div>
               <div>
-                <a href="#">Lorem ipsum dolor sit ame</a>
+                <a href="https://www.waveplatform.io/wallet" target="_blank">
+                  Wallet
+                </a>
               </div>
               <div>
-                <a href="#">Lorem ipsum dolor sit ame</a>
+                <a href="/">Wavescan</a>
+              </div>
+            </div>
+            <div className="col-12 col-md-3 text-left font-wight">
+              <h5 style={{ color: "#fff", textAlign: "left" }}>Company</h5>
+
+              <div>
+                <a href="https://www.waveplatform.io/" target="_blank">
+                  About us
+                </a>
+              </div>
+              <div>
+                <a href="https://www.waveplatform.io/" target="_blank">
+                  Contact
+                </a>
               </div>
             </div>
           </div>
