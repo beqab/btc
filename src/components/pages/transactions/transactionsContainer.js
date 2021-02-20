@@ -148,8 +148,8 @@ function transactionsContainer({ transaction }) {
                         </div>
                         <div class="col-md-9">
                           <i class="far fa-clock small mr-1"></i>
-                          <a href={"/wallet/" + transaction?.input?.from}>
-                            {transaction?.input?.from}
+                          <a href={"/wallet/" + transaction?.output?.to}>
+                            {transaction?.output?.to}
                           </a>
                         </div>
                       </div>
