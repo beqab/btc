@@ -139,7 +139,7 @@ const BlockById = ({ match, ...props }) => {
                         <th> Rank</th>
                         <th>Accounts</th>
                         <th>Balance</th>
-                        <th>TRX Frozen</th>
+                        <th>Freezed Wave</th>
                       </tr>
                     </thead>
                     <tbody>
