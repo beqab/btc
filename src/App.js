@@ -10,6 +10,8 @@ import Blocks from "./components/pages/blocks";
 import Transactions from "./components/pages/transactions";
 import TransactionsByID from "./components/pages/transactions/transactionById";
 import Wallet from "./components/pages/wolet";
+import Accounts from "./components/pages/accounts";
+
 function App() {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   return (
@@ -119,7 +121,7 @@ function App() {
                         <a href="/blocks?page=0">View Blocks</a>
                       </li>
                       <li>
-                        <a href="#">Top Accounts</a>
+                        <a href="/accounts">Top Accounts</a>
                       </li>
                     </ul>
                   </li>
@@ -203,6 +205,7 @@ function App() {
           <Route exact path="/block/:ID" component={BlockById} />
           <Route exact path="/transaction/:ID" component={TransactionsByID} />
           <Route exact path="/blocks" component={Blocks} />
+          <Route exact path="/accounts" component={Accounts} />
           <Route exact path="/transactions" component={Transactions} />
           <Route exact path="/wallet/:ID" component={Wallet} />
         </Switch>

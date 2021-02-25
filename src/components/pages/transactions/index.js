@@ -47,6 +47,16 @@ const BlockById = ({ match, ...props }) => {
   const [blockError, setBlockError] = useState(null);
 
   useEffect(() => {
+    // axios
+    //   .get(`http://51.255.211.135:8181/transaction/unfinished?page=${page}`)
+    //   .then((res) => {
+    //     // debugger;
+    //   });
+
+    // axios.get(`http://51.255.211.135:8181/accounts`).then((res) => {
+    //   // debugger;
+    // });
+
     axios
       .get(`http://51.255.211.135:8181/chain?page=${page}`)
       .then((res) => {
