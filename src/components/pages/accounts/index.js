@@ -150,7 +150,7 @@ const BlockById = ({ match, ...props }) => {
                             <td>
                               <a
                                 className="hathOverflow"
-                                href={/account/ + el.pubKey}
+                                href={/Wallet/ + el.pubKey}
                                 data-toggle="tooltip"
                                 data-placement="top"
                                 title={el.pubKey}
