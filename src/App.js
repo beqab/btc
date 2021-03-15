@@ -45,8 +45,8 @@ function App() {
               </a>
             </div>
             <div className="col-md-10">
-              <nav className="header-menu">
-                <ul>
+              <nav className="header-menu navbar-nav">
+                <ul className="blabla">
                   <li>
                     <a href="/">
                       <img src="https://beta.waveplatform.io/public/scan/assets/images/home.png" />
@@ -70,6 +70,26 @@ function App() {
                       <img src="https://beta.waveplatform.io/public/scan/assets/images/tokens.png" />
                       <span>BLOCKCHAIN</span>
                     </a>
+
+                    {/* <a className="nav-link" href="/transactions" href="#">
+                      Tokens &#11206;
+                    </a> */}
+
+                    <ul>
+                      <li>
+                        <a href="/transactions?page=0">View Txns</a>
+                      </li>
+                      <li>
+                        <a href="#">View Pending Txns</a>
+                      </li>
+                      <hr />
+                      <li>
+                        <a href="/blocks?page=0">View Blocks</a>
+                      </li>
+                      <li>
+                        <a href="/accounts">Top Accounts</a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </nav>

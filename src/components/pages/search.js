@@ -664,7 +664,7 @@ class Search extends React.Component {
                     </div>
                     <div className="box-col">
                       <span className="col-name">FULLY DILUTED MARKET CAP</span>
-                      <span className="col-value">45,245,084.54</span>
+                      <span className="col-value">— Not Connected</span>
                     </div>
                   </div>
                   <div className="box-row">
