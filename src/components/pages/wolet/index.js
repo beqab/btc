@@ -22,6 +22,17 @@ function Index({ match }) {
           ...res.data.transactions.INCOMING,
           ...res.data.transactions.OUTGOING,
         ]);
+
+        // let sum = 0;
+
+        // let dd = [
+        //   ...res.data.transactions.INCOMING,
+        //   ...res.data.transactions.OUTGOING,
+        // ].map((el) => {
+        //   sum += el.output.amount;
+        // });
+
+        // debugger;
         // console.log(new Date(res.data.header.data.timestamp * 1000));
         setLoading(false);
       })
@@ -34,46 +45,80 @@ function Index({ match }) {
 
         // setWalletData(testObj);
         // debugger;
-        setWalletError("Wallet not fond ");
+        setWalletError("Wallet not found ");
       });
   }, [match.params?.ID]);
   return (
-    <div className="mt-5 pt-4">
-      <h3 className="w700 mb-4 text-center  text-sm-left">Address</h3>
+    <div className="mt-1 pt-4">
+      {/* <h3 className="w700 mb-4 text-center  text-sm-left">Address</h3> */}
       {WalletError ? (
         <div className="alert alert-danger w700" role="alert">
           {WalletError}
         </div>
       ) : (
-        <div className="w700  d-md-flex d-block address ">
-          <div className="test-sm-centre">
-            <img
-              className="qrImg"
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${WalletData?.pubKey}`}
-            />
-          </div>
-
-          <div className=" pl-0 pl-md-3 test-sm-centre">
-            <h5 className="font-sm-14 walletAddress ">
-              address: <span> {WalletData?.pubKey}</span>
-            </h5>
-            <h5 className="font-sm-14">balance: {WalletData?.balance} Wave</h5>
-            <h5 className="font-sm-14">
-              blocked: {WalletData?.blocked}
-              {/* {this.state.transactionsData &&
-                  this.state.transactionsData.transactions.length} */}
-            </h5>
-
-            <h5 className="font-sm-14">
-              pending: {WalletData?.pending}
-              {/* {this.state.transactionsData &&
-                  this.calcTotalReceivedSent(
-                    this.state.transactionsData.transactions,
-                    this.state.walletData.address
-                  ).Sent} */}
-            </h5>
+        <div className="page">
+          <div className="page-title">Adress Information</div>
+          <div className="container">
+            <div className="row mt-4">
+              <div className="col-md-2">
+                <div className="qr">
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${WalletData?.pubKey}`}
+                    className="w-100"
+                  />
+                </div>
+              </div>
+              <div className="col-md-10">
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="address-box first">
+                      <div className="title">Adress:</div>
+                      <div style={{ fontSize: "17px" }} className="value">
+                        {WalletData?.pubKey}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="address-box second">
+                      <div className="title">Balance:</div>
+                      <div className="value"> {WalletData?.balance}</div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="address-box third">
+                      <div className="title">Pending: transactions:</div>
+                      <div className="value">{WalletData?.blocked}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        // <div className="w700  d-md-flex d-block address ">
+        //   <div className="test-sm-centre">
+        //     <img
+        //       className="qrImg"
+        //       src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${WalletData?.pubKey}`}
+        //     />
+        //   </div>
+
+        //   <div className=" pl-0 pl-md-3 test-sm-centre">
+        //     <h5 className="font-sm-14 walletAddress ">
+        //       address: <span> {WalletData?.pubKey}</span>
+        //     </h5>
+        //     <h5 className="font-sm-14">balance: {WalletData?.balance} Wave</h5>
+        //     <h5 className="font-sm-14">
+        //       blocked: {WalletData?.blocked}
+
+        //     </h5>
+
+        //     <h5 className="font-sm-14">
+        //       pending: {WalletData?.pending}
+
+        //     </h5>
+        //   </div>
+        // </div>
       )}
       <div className="container">
         <TransactionsListContainer transactions={walletTransactions} />

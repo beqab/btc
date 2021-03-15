@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Route, Switch } from "react-router-dom";
 import logo from "./imgs/logo.svg";
 import logo2 from "./imgs/logo2.png";
@@ -14,6 +15,7 @@ import Accounts from "./components/pages/accounts";
 
 function App() {
   const [toggleMenu, setToggleMenu] = React.useState(false);
+
   return (
     <>
       <div className="App pb-5">
@@ -31,7 +33,51 @@ function App() {
           Learn React
         </a>
       </header> */}
-        <div className="header">
+
+        <div className="container">
+          <div className="row">
+            <div className="col-md-2">
+              <a href="/" className="logo">
+                <img
+                  src="https://beta.waveplatform.io/public/scan/assets/images/logo.png"
+                  className="w-100"
+                />
+              </a>
+            </div>
+            <div className="col-md-10">
+              <nav className="header-menu">
+                <ul>
+                  <li>
+                    <a href="/">
+                      <img src="https://beta.waveplatform.io/public/scan/assets/images/home.png" />
+                      <span>HOME</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/accounts">
+                      <img src="https://beta.waveplatform.io/public/scan/assets/images/holder.png" />
+                      <span>HOLDER</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/blocks?page=0">
+                      <img src="https://beta.waveplatform.io/public/scan/assets/images/tokens.png" />
+                      <span>TOKENS</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/transactions?page=0">
+                      <img src="https://beta.waveplatform.io/public/scan/assets/images/tokens.png" />
+                      <span>BLOCKCHAIN</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="header">
           <div className="container">
             <nav id="navBar" className="navbar navbar-expand-lg  ">
               <a className="navbar-brand" href="/">
@@ -59,12 +105,12 @@ function App() {
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 352 512"
-                      class="svg-inline--fa fa-times fa-w-11 fa-2x"
+                      className="svg-inline--fa fa-times fa-w-11 fa-2x"
                     >
                       <path
                         fill="currentColor"
                         d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                        class=""
+                        className=""
                       ></path>
                     </svg>
                   ) : (
@@ -76,12 +122,12 @@ function App() {
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 448 512"
-                      class="svg-inline--fa fa-bars fa-w-14 fa-2x"
+                      className="svg-inline--fa fa-bars fa-w-14 fa-2x"
                     >
                       <path
                         fill="currentColor"
                         d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-                        class=""
+                        className=""
                       ></path>
                     </svg>
                   )}
@@ -140,28 +186,11 @@ function App() {
                     </ul>
                   </li>
                 </ul>
-                {/* <button className="brn btn-default ml-5 btnBluGradient">
-                  <svg
-                    id="Icon_open-account-login"
-                    data-name="Icon open-account-login"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="13.815"
-                    height="20.838"
-                    viewBox="0 0 23.815 20.838"
-                  >
-                    <path
-                      id="Icon_open-account-login-2"
-                      data-name="Icon open-account-login"
-                      d="M8.931,0V2.977H20.838V17.862H8.931v2.977H23.815V0Zm2.977,5.954V8.931H0v2.977H11.908v2.977l5.954-4.465Z"
-                      fill="#fff"
-                    />
-                  </svg>{" "}
-                  login
-                </button> */}
+              
               </div>
             </nav>
           </div>
-        </div>
+        </div> */}
         {/* <nav id="navBar" className="navbar navbar-expand-lg navbar-light bg-light">
           <button
             className="navbar-toggler"

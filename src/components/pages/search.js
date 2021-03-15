@@ -27,6 +27,22 @@ class Search extends React.Component {
     this.setState({
       fetching: true,
     });
+    // const [stat, setStat] = React.useState(false);
+    // useEffect(() => {
+    axios
+      .get("http://51.255.211.135:8181/blockchain/statistics")
+      .then((res) => {
+        this.setState({
+          stat: res.data,
+        });
+        // (res.data);
+        // debugger;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }, []);
+
     let transactions = [];
     // http://51.255.211.135/get_header_by_height
     // curl -d '{}' -H "Content-Type: application/json" -X POST http://51.255.211.135/get_blockchain_state
@@ -612,12 +628,12 @@ class Search extends React.Component {
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
-                    class="svg-inline--fa fa-search fa-w-16 fa-2x"
+                    className="svg-inline--fa fa-search fa-w-16 fa-2x"
                   >
                     <path
                       fill="currentColor"
                       d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                      class=""
+                      className=""
                     ></path>
                   </svg>
                 </button>
@@ -625,6 +641,114 @@ class Search extends React.Component {
             </form>
           </div>
         </div>
+
+        <section className="overview">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="box">
+                  <div className="title">
+                    Overview{" "}
+                    <img src="https://beta.waveplatform.io/public/scan/assets/images/icon.png" />{" "}
+                    Wave (WAE)
+                  </div>
+                  <div className="box-row">
+                    <div className="box-col">
+                      <span className="col-name">PRICE</span>
+                      <div className="d-flex">
+                        <span className="col-value">$0.05</span>
+                        {/* <span className="col-percent text-success">
+                          (+37.66%)
+                        </span> */}
+                      </div>
+                    </div>
+                    <div className="box-col">
+                      <span className="col-name">FULLY DILUTED MARKET CAP</span>
+                      <span className="col-value">45,245,084.54</span>
+                    </div>
+                  </div>
+                  <div className="box-row">
+                    <div className="box-col d-flex pt-3">
+                      <span className="col-label">Max Total Supply:</span>
+                      <span className="col-value2">175.000.000 Wave</span>
+                    </div>
+                    <div className="box-col d-flex pt-3">
+                      <span className="col-label">Circulating Supply:</span>
+                      <span className="col-value2">
+                        {this.state.stat?.currency_supply} Wave
+                      </span>
+                    </div>
+                  </div>
+                  <div className="d-flex pt-3">
+                    <div className="col">Wallet Addressess:</div>
+                    <div className="col">
+                      {this.state.stat?.wallet_addresses}{" "}
+                      {/* <span className="text-success">(+0,035%)</span> */}
+                    </div>
+                    {/* <div className="col">Chart Here</div> */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="box">
+                  <div className="title">Profile Summary</div>
+                  <ul className="like-table">
+                    <li>
+                      <div>Official Wallet:</div>
+                      <div>
+                        <a href="#">https://waveplatform.io/wallets</a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>Decimals:</div>
+                      <div>6</div>
+                    </li>
+                    <li>
+                      <div>Official Site:</div>
+                      <div>
+                        <a href="#">https://waveplatform.io/wallets</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="boxes">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="blue-box first">
+                  <div class="title">Total WAE Frozen:</div>
+                  <div class="number">{this.state.stat?.freezers_sum}</div>
+                  <a href="/transactions?page=0" class="btn">
+                    view statistics
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="blue-box second">
+                  <div class="title">Latest Block:</div>
+                  <div class="number">6.945.061</div>
+                  <a href="//blocks?page=0" class="btn">
+                    view all blocks
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="blue-box third">
+                  <div class="title">Holders:</div>
+                  <div class="number">{this.state.stat?.holders}</div>
+                  <a href="/accounts" class="btn">
+                    view all holders
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <div className="container  pt-5">
           <br />
           <br />
@@ -718,7 +842,7 @@ class Search extends React.Component {
                                   <div className="d-flex justify-content-between">
                                     <div className="text-nowrap">
                                       <span className="d-block mb-1 mb-sm-0">
-                                        Miner{" "}
+                                        Minted{" "}
                                         <a
                                           className="hash-tag text-truncate"
                                           href="#"
