@@ -721,7 +721,7 @@ class Search extends React.Component {
             <div class="row">
               <div class="col-md-4">
                 <div class="blue-box first">
-                  <div class="title">Total WAE Frozen:</div>
+                  <div class="title">Total WAVE Frozen:</div>
                   <div class="number">{this.state.stat?.freezers_sum}</div>
                   <a href="/transactions?page=0" class="btn">
                     view statistics
